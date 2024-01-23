@@ -6,7 +6,7 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFEEFF41),
+      backgroundColor: const Color(0xFF7DC7BF),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -15,7 +15,7 @@ class Welcome extends StatelessWidget {
             ),
             Center(
               child: Image.asset(
-                'images/lg.png',
+                'images/sam18.png',
                 width: 200,
                 height: 200,
               ),
@@ -28,7 +28,7 @@ class Welcome extends StatelessWidget {
                 alignment: Alignment.center,
               ),
               child: const Text(
-                "Login",
+                "로그인",
               ),
             ),
             const SizedBox(
@@ -42,7 +42,7 @@ class Welcome extends StatelessWidget {
                 alignment: Alignment.center,
               ),
               child: const Text(
-                "Register",
+                "WITT 가입하기",
               ),
             ),
             const SizedBox(
@@ -61,10 +61,11 @@ class Welcome extends StatelessWidget {
                   width: 4,
                 ),
                 const Text(
-                  'a quest',
+                  'a Guest',
                   style: TextStyle(
-                    color: Colors.black,
+                    color: Color(0xFF45757B),
                     fontWeight: FontWeight.bold,
+                    fontSize: 14,
                   ),
                 ),
               ],

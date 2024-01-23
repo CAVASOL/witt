@@ -12,24 +12,171 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: logOut,
-            icon: const Icon(
-              Icons.logout_rounded,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          actions: [
+            IconButton(
+              onPressed: logOut,
+              icon: const Icon(
+                Icons.logout_rounded,
+              ),
+            )
+          ],
+        ),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Center(
+                  child: Text(
+                    "Heyo, \n${user.email}",
+                    style: const TextStyle(
+                      fontSize: 20,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                )
+              ],
             ),
-          )
-        ],
-      ),
-      body: Center(
-        child: Text(
-          "Heyo, \n${user.email}",
-          style: const TextStyle(
-            fontSize: 20,
           ),
-          textAlign: TextAlign.center,
+        ),
+        bottomNavigationBar: SizedBox(
+          height: 90,
+          child: BottomAppBar(
+            color: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: 8,
+                left: 12,
+                right: 12,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Search
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        '/home',
+                      );
+                    },
+                    child: const Column(
+                      children: [
+                        Icon(
+                          Icons.home_outlined,
+                          color: Color(0xFF292929),
+                        ),
+                        SizedBox(
+                          height: 4,
+                        ),
+                        Text(
+                          '홈',
+                          style: TextStyle(
+                            color: Color(0xFF292929),
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Favorite
+                  const Column(
+                    children: [
+                      Icon(
+                        Icons.explore_outlined,
+                        color: Color(0xFF292929),
+                      ),
+                      SizedBox(
+                        height: 4,
+                      ),
+                      Text(
+                        '더 보기',
+                        style: TextStyle(
+                          color: Color(0xFF292929),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                  // Airbnb
+                  const Column(
+                    children: [
+                      Icon(
+                        Icons.camera_rounded,
+                        color: Color(0xFF292929),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        '카메라',
+                        style: TextStyle(
+                          color: Color(0xFF292929),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                  // Chat
+                  const Column(
+                    children: [
+                      Icon(
+                        Icons.cases_outlined,
+                        color: Color(0xFF292929),
+                      ),
+                      SizedBox(
+                        height: 4,
+                      ),
+                      Text(
+                        '나의 페이지',
+                        style: TextStyle(
+                          color: Color(0xFF292929),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                  // Profile
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        '/profile',
+                      );
+                    },
+                    child: const Column(
+                      children: [
+                        Icon(
+                          Icons.person_outline_rounded,
+                          color: Color(0xFF292929),
+                        ),
+                        SizedBox(
+                          height: 4,
+                        ),
+                        Text(
+                          '프로필',
+                          style: TextStyle(
+                            color: Color(0xFF292929),
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
