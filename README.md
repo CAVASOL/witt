@@ -1,7 +1,3 @@
-## Login Auth
+# WITT
 
-Login with google or apple acc. 
-
-### Demo
-
-<img align="center" src="./demo.png" width="300px" />
+As a Capstone Project for the AIFFEL Core program, it is a PWA service that allows user to check image information using object detection performance, and further supports detailed wiki information related to the user's object and environment exploration.
