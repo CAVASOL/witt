@@ -190,7 +190,7 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SquareTile(
-                    imagePath: 'images/google.png',
+                    imagePath: 'assets/images/google.png',
                   ),
                   SizedBox(
                     width: 25,

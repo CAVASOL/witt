@@ -16,16 +16,6 @@ class Home extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          actions: [
-            IconButton(
-              onPressed: logOut,
-              icon: const Icon(
-                Icons.logout_rounded,
-              ),
-            )
-          ],
-        ),
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
@@ -86,7 +76,7 @@ class Home extends StatelessWidget {
                     ),
                   ),
                   // Favorite
-                  
+
                   GestureDetector(
                     onTap: () {
                       Navigator.pushNamed(
@@ -98,7 +88,8 @@ class Home extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.explore_outlined,
-                          color: Color.fromARGB(255, 49, 27, 27),
+                          color: Color(0xFF292929),
+                          // color: Color.fromARGB(255, 49, 27, 27),
                         ),
                         SizedBox(
                           height: 4,
@@ -115,7 +106,7 @@ class Home extends StatelessWidget {
                     ),
                   ),
                   // Airbnb
-                  
+
                   GestureDetector(
                     onTap: () {
                       Navigator.pushNamed(
@@ -127,7 +118,6 @@ class Home extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.camera_rounded,
-
                           color: Color(0xFF292929),
                         ),
                         SizedBox(

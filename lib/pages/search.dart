@@ -17,16 +17,7 @@ class Search extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          actions: [
-            IconButton(
-              onPressed: logOut,
-              icon: const Icon(
-                Icons.logout_rounded,
-              ),
-            )
-          ],
-        ),
+        appBar: AppBar(),
         body: const SafeArea(
           child: SingleChildScrollView(
             padding: EdgeInsets.only(top: 20),
@@ -114,7 +105,7 @@ class Search extends StatelessWidget {
                     ),
                   ),
                   // Airbnb
-                  const Column( 
+                  const Column(
                     children: [
                       Icon(
                         Icons.camera_rounded,

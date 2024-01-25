@@ -15,7 +15,7 @@ class Welcome extends StatelessWidget {
             ),
             Center(
               child: Image.asset(
-                'images/sam18.png',
+                'assets/images/sam18.png',
                 width: 200,
                 height: 200,
               ),
