@@ -75,25 +75,33 @@ class Profile extends StatelessWidget {
                   ),
                 ),
                 // Favorite
-                const Column(
-                  children: [
-                    Icon(
-                      Icons.explore_outlined,
-                      color: Color(0xFF292929),
+                GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        '/search',
+                      );
+                    },
+                    child: const Column(
+                      children: [
+                        Icon(
+                          Icons.explore_outlined,
+                          color: Color.fromARGB(255, 49, 27, 27),
+                        ),
+                        SizedBox(
+                          height: 4,
+                        ),
+                        Text(
+                          '검색',
+                          style: TextStyle(
+                            color: Color(0xFF292929),
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    Text(
-                      '더 보기',
-                      style: TextStyle(
-                        color: Color(0xFF292929),
-                        fontWeight: FontWeight.w400,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
                 // Airbnb
                 const Column(
                   children: [

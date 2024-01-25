@@ -5,6 +5,7 @@ import 'package:login_auth/pages/auth.dart';
 import 'package:login_auth/pages/home.dart';
 import 'package:login_auth/pages/register.dart';
 import 'package:login_auth/pages/welcome.dart';
+import 'package:login_auth/pages/search.dart';
 import 'package:login_auth/pages/profile.dart';
 import 'firebase_options.dart';
 
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         '/register': (context) => RegisterPage(onTap: onTap),
         '/home': (context) => Home(),
         '/profile': (context) => Profile(),
+        '/search': (context) => Search(),
         '/camera': (context) => const PickImage(),
       },
     );

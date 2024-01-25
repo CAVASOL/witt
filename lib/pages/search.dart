@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:login_auth/widgets/widgets.dart';
 
-class Home extends StatelessWidget {
-  Home({super.key});
+class Search extends StatelessWidget {
+  Search({super.key});
 
   final user = FirebaseAuth.instance.currentUser!;
 
@@ -26,20 +27,19 @@ class Home extends StatelessWidget {
             )
           ],
         ),
-        body: SafeArea(
+        body: const SafeArea(
           child: SingleChildScrollView(
+            padding: EdgeInsets.only(top: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Center(
-                  child: Text(
-                    "Heyo, \n${user.email}",
-                    style: const TextStyle(
-                      fontSize: 20,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                )
+                LocationSearchBar(),
+                SizedBox(
+                  height: 20,
+                ),
+                Divider(
+                  height: 0,
+                ),
               ],
             ),
           ),
@@ -86,7 +86,6 @@ class Home extends StatelessWidget {
                     ),
                   ),
                   // Favorite
-                  
                   GestureDetector(
                     onTap: () {
                       Navigator.pushNamed(
@@ -115,7 +114,6 @@ class Home extends StatelessWidget {
                     ),
                   ),
                   // Airbnb
-
                   const Column( 
                     children: [
                       Icon(
@@ -128,34 +126,12 @@ class Home extends StatelessWidget {
                       Text(
                         '카메라',
                         style: TextStyle(
-
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        '/camera',
-                      );
-                    },
-                    child: const Column(
-                      children: [
-                        Icon(
-                          Icons.camera_rounded,
-
                           color: Color(0xFF292929),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
                         ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          '카메라',
-                          style: TextStyle(
-                            color: Color(0xFF292929),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                   // Chat
                   const Column(
