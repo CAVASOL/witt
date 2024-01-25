@@ -115,20 +115,7 @@ class Home extends StatelessWidget {
                     ),
                   ),
                   // Airbnb
-
-                  const Column( 
-                    children: [
-                      Icon(
-                        Icons.camera_rounded,
-                        color: Color(0xFF292929),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        '카메라',
-                        style: TextStyle(
-
+                  
                   GestureDetector(
                     onTap: () {
                       Navigator.pushNamed(
