@@ -40,6 +40,8 @@ dependencies:
   camera: ^0.10.5+9
   image_picker: ^0.8.5+3
   flutter_tflite: ^1.0.1
+  file_picker: ^6.1.1
+  image_picker_web: ^3.1.1
 
 dev_dependencies:
   flutter_test:

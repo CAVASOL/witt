@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:login_auth/pages/camera.dart';
 import 'package:login_auth/pages/auth.dart';
 import 'package:login_auth/pages/home.dart';
 import 'package:login_auth/pages/register.dart';
 import 'package:login_auth/pages/welcome.dart';
 import 'package:login_auth/pages/search.dart';
+import 'package:login_auth/pages/profile.dart';
 import 'firebase_options.dart';
-import 'pages/profile.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +28,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'WITT',
       theme: ThemeData(fontFamily: 'NotoSansKR'),
-      // home: const Auth(),
       routes: {
         '/': (context) => const Welcome(),
         '/login': (context) => const Auth(),
@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => Home(),
         '/profile': (context) => Profile(),
         '/search': (context) => Search(),
+        '/camera': (context) => const PickImage(),
       },
     );
   }

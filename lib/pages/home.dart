@@ -115,6 +115,7 @@ class Home extends StatelessWidget {
                     ),
                   ),
                   // Airbnb
+
                   const Column( 
                     children: [
                       Icon(
@@ -127,12 +128,34 @@ class Home extends StatelessWidget {
                       Text(
                         '카메라',
                         style: TextStyle(
+
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        '/camera',
+                      );
+                    },
+                    child: const Column(
+                      children: [
+                        Icon(
+                          Icons.camera_rounded,
+
                           color: Color(0xFF292929),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
                         ),
-                      ),
-                    ],
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          '카메라',
+                          style: TextStyle(
+                            color: Color(0xFF292929),
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                   // Chat
                   const Column(
