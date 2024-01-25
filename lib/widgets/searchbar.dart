@@ -31,12 +31,12 @@ class LocationSearchBar extends StatelessWidget {
                 Column(
                   children: [
                     SizedBox(
-                      width: 220,
+                      width: 200,
                       child: TextField(
                         maxLines: 1,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: '키워드를 검색해주세요!',
+                          hintText: '키워드를 검색해 주세요!',
                           hintStyle: TextStyle(
                             color: Colors.black87,
                             fontWeight: FontWeight.w400,
@@ -55,17 +55,17 @@ class LocationSearchBar extends StatelessWidget {
                 )
               ],
             ),
-            const SizedBox(width: 24),
+            const SizedBox(width: 28),
             Container(
-              padding: const EdgeInsets.all(7),
+              padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey),
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Image.asset(
-                'images/sam18.png',
+                'assets/images/filter.png',
                 height: 20,
-                width: 20,  
+                width: 20,
               ),
             ),
           ],

@@ -34,14 +34,11 @@ class _PickImageState extends State<PickImage> {
                   )
                 : const CircleAvatar(
                     radius: 120,
-                    backgroundColor: Colors.white,
-                    backgroundImage: NetworkImage(
-                      "https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=612x612&w=0&k=20&c=dhV2p1JwmloBTOaGAtaA3AW1KSnjsdMt7-U_3EZElZ0=",
-                    ),
+                    backgroundColor: Colors.blue,
                   ),
             Positioned(
               bottom: -0,
-              left: 140,
+              left: 160,
               child: IconButton(
                 onPressed: () {
                   showImagePickerOption(context);
@@ -106,7 +103,7 @@ class _PickImageState extends State<PickImage> {
                       height: 4,
                     ),
                     Text(
-                      '더 보기',
+                      '검색',
                       style: TextStyle(
                         color: Color(0xFF292929),
                         fontWeight: FontWeight.w400,
