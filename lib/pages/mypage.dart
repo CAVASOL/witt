@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class Profile extends StatelessWidget {
-  Profile({super.key});
+class MyPage extends StatelessWidget {
+  MyPage({super.key});
 
   final user = FirebaseAuth.instance.currentUser!;
 
@@ -19,7 +19,7 @@ class Profile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text(
-                "Profile",
+                "Heyyyyyyyyyyyy",
               ),
               Center(
                 child: IconButton(
@@ -46,7 +46,6 @@ class Profile extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Search
                 GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(
@@ -74,93 +73,78 @@ class Profile extends StatelessWidget {
                     ],
                   ),
                 ),
-                // Favorite
-                GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        '/search',
-                      );
-                    },
-                    child: const Column(
-                      children: [
-                        Icon(
-                          Icons.explore_outlined,
-                          color: Color.fromARGB(255, 49, 27, 27),
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          '검색',
-                          style: TextStyle(
-                            color: Color(0xFF292929),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                // Airbnb
-                const Column(
-                  children: [
-                    Icon(
-                      Icons.camera_rounded,
-                      color: Color(0xFF292929),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      '카메라',
-                      style: TextStyle(
-                        color: Color(0xFF292929),
-                        fontWeight: FontWeight.w400,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                ),
-                // Chat
-                const Column(
-                  children: [
-                    Icon(
-                      Icons.cases_outlined,
-                      color: Color(0xFF292929),
-                    ),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    Text(
-                      '나의 페이지',
-                      style: TextStyle(
-                        color: Color(0xFF292929),
-                        fontWeight: FontWeight.w400,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                ),
-                // Profile
                 GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(
                       context,
-                      '/profile',
+                      '/search',
                     );
                   },
                   child: const Column(
                     children: [
                       Icon(
-                        Icons.person_outline_rounded,
+                        Icons.explore_outlined,
                         color: Color(0xFF292929),
                       ),
                       SizedBox(
                         height: 4,
                       ),
                       Text(
-                        '프로필',
+                        '검색',
+                        style: TextStyle(
+                          color: Color(0xFF292929),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/camera',
+                    );
+                  },
+                  child: const Column(
+                    children: [
+                      Icon(
+                        Icons.camera_rounded,
+                        color: Color(0xFF292929),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        '카메라',
+                        style: TextStyle(
+                          color: Color(0xFF292929),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/mypage',
+                    );
+                  },
+                  child: const Column(
+                    children: [
+                      Icon(
+                        Icons.cases_outlined,
+                        color: Color(0xFF292929),
+                      ),
+                      SizedBox(
+                        height: 4,
+                      ),
+                      Text(
+                        '나의 페이지',
                         style: TextStyle(
                           color: Color(0xFF292929),
                           fontWeight: FontWeight.w400,

@@ -29,6 +29,14 @@ class Home extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
+                ),
+                Center(
+                  child: IconButton(
+                    onPressed: logOut,
+                    icon: const Icon(
+                      Icons.logout_rounded,
+                    ),
+                  ),
                 )
               ],
             ),
@@ -47,7 +55,6 @@ class Home extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Search
                   GestureDetector(
                     onTap: () {
                       Navigator.pushNamed(
@@ -75,8 +82,6 @@ class Home extends StatelessWidget {
                       ],
                     ),
                   ),
-                  // Favorite
-
                   GestureDetector(
                     onTap: () {
                       Navigator.pushNamed(
@@ -89,7 +94,6 @@ class Home extends StatelessWidget {
                         Icon(
                           Icons.explore_outlined,
                           color: Color(0xFF292929),
-                          // color: Color.fromARGB(255, 49, 27, 27),
                         ),
                         SizedBox(
                           height: 4,
@@ -105,8 +109,6 @@ class Home extends StatelessWidget {
                       ],
                     ),
                   ),
-                  // Airbnb
-
                   GestureDetector(
                     onTap: () {
                       Navigator.pushNamed(
@@ -134,32 +136,11 @@ class Home extends StatelessWidget {
                       ],
                     ),
                   ),
-                  // Chat
-                  const Column(
-                    children: [
-                      Icon(
-                        Icons.cases_outlined,
-                        color: Color(0xFF292929),
-                      ),
-                      SizedBox(
-                        height: 4,
-                      ),
-                      Text(
-                        '나의 페이지',
-                        style: TextStyle(
-                          color: Color(0xFF292929),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
-                  ),
-                  // Profile
                   GestureDetector(
                     onTap: () {
                       Navigator.pushNamed(
                         context,
-                        '/profile',
+                        '/mypage',
                       );
                     },
                     child: const Column(
@@ -172,7 +153,7 @@ class Home extends StatelessWidget {
                           height: 4,
                         ),
                         Text(
-                          '프로필',
+                          '나의 페이지',
                           style: TextStyle(
                             color: Color(0xFF292929),
                             fontWeight: FontWeight.w400,

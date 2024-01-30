@@ -34,7 +34,7 @@ class _PickImageState extends State<PickImage> {
                   )
                 : const CircleAvatar(
                     radius: 120,
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Colors.black,
                   ),
             Positioned(
               bottom: -0,
@@ -64,7 +64,6 @@ class _PickImageState extends State<PickImage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Search
                 GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(
@@ -92,27 +91,33 @@ class _PickImageState extends State<PickImage> {
                     ],
                   ),
                 ),
-                // Favorite
-                const Column(
-                  children: [
-                    Icon(
-                      Icons.explore_outlined,
-                      color: Color(0xFF292929),
-                    ),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    Text(
-                      '검색',
-                      style: TextStyle(
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/search',
+                    );
+                  },
+                  child: const Column(
+                    children: [
+                      Icon(
+                        Icons.explore_outlined,
                         color: Color(0xFF292929),
-                        fontWeight: FontWeight.w400,
-                        fontSize: 12,
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        height: 4,
+                      ),
+                      Text(
+                        '검색',
+                        style: TextStyle(
+                          color: Color(0xFF292929),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                // Airbnb
                 GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(
@@ -140,32 +145,11 @@ class _PickImageState extends State<PickImage> {
                     ],
                   ),
                 ),
-                // Chat
-                const Column(
-                  children: [
-                    Icon(
-                      Icons.cases_outlined,
-                      color: Color(0xFF292929),
-                    ),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    Text(
-                      '나의 페이지',
-                      style: TextStyle(
-                        color: Color(0xFF292929),
-                        fontWeight: FontWeight.w400,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                ),
-                // Profile
                 GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(
                       context,
-                      '/profile',
+                      '/mypage',
                     );
                   },
                   child: const Column(
@@ -178,7 +162,7 @@ class _PickImageState extends State<PickImage> {
                         height: 4,
                       ),
                       Text(
-                        '프로필',
+                        '나의 페이지',
                         style: TextStyle(
                           color: Color(0xFF292929),
                           fontWeight: FontWeight.w400,
