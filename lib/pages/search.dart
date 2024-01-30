@@ -45,7 +45,6 @@ class Search extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Search
                   GestureDetector(
                     onTap: () {
                       Navigator.pushNamed(
@@ -73,7 +72,6 @@ class Search extends StatelessWidget {
                       ],
                     ),
                   ),
-                  // Favorite
                   GestureDetector(
                     onTap: () {
                       Navigator.pushNamed(
@@ -85,7 +83,7 @@ class Search extends StatelessWidget {
                       children: [
                         Icon(
                           Icons.explore_outlined,
-                          color: Color.fromARGB(255, 49, 27, 27),
+                          color: Color(0xFF292929),
                         ),
                         SizedBox(
                           height: 4,
@@ -101,52 +99,38 @@ class Search extends StatelessWidget {
                       ],
                     ),
                   ),
-                  // Airbnb
-                  const Column(
-                    children: [
-                      Icon(
-                        Icons.camera_rounded,
-                        color: Color(0xFF292929),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        '카메라',
-                        style: TextStyle(
-                          color: Color(0xFF292929),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
-                  ),
-                  // Chat
-                  const Column(
-                    children: [
-                      Icon(
-                        Icons.cases_outlined,
-                        color: Color(0xFF292929),
-                      ),
-                      SizedBox(
-                        height: 4,
-                      ),
-                      Text(
-                        '나의 페이지',
-                        style: TextStyle(
-                          color: Color(0xFF292929),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
-                  ),
-                  // Profile
                   GestureDetector(
                     onTap: () {
                       Navigator.pushNamed(
                         context,
-                        '/profile',
+                        '/camera',
+                      );
+                    },
+                    child: const Column(
+                      children: [
+                        Icon(
+                          Icons.camera_rounded,
+                          color: Color(0xFF292929),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          '카메라',
+                          style: TextStyle(
+                            color: Color(0xFF292929),
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        '/mypage',
                       );
                     },
                     child: const Column(
@@ -159,7 +143,7 @@ class Search extends StatelessWidget {
                           height: 4,
                         ),
                         Text(
-                          '프로필',
+                          '나의 페이지',
                           style: TextStyle(
                             color: Color(0xFF292929),
                             fontWeight: FontWeight.w400,
