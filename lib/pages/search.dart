@@ -17,23 +17,20 @@ class Search extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(),
-        body: const SafeArea(
-          child: SingleChildScrollView(
-            padding: EdgeInsets.only(top: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                LocationSearchBar(),
-                SizedBox(
-                  height: 20,
+        body: const Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    LocationSearchBar(),
+                  ],
                 ),
-                Divider(
-                  height: 0,
-                ),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
         bottomNavigationBar: SizedBox(
           height: 90,
