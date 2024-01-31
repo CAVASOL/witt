@@ -44,6 +44,7 @@ app.*.map.json
 
 firebase_options.dart
 google-services.json
+myenv
 
 # Virtualenv
 .Python
