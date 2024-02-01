@@ -1,42 +1,203 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:login_auth/components/info_card.dart';
+import 'package:login_auth/components/sample.dart';
+import 'package:login_auth/widgets/widgets.dart';
 
-class Home extends StatelessWidget {
-  Home({super.key});
+class Home extends StatefulWidget {
+  const Home({super.key});
 
+  @override
+  HomeState createState() => HomeState();
+}
+
+class HomeState extends State<Home> {
   final user = FirebaseAuth.instance.currentUser!;
-
-  void logOut() {
-    FirebaseAuth.instance.signOut();
-  }
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: IconButton(
+                icon: const Icon(Icons.nightlight),
+                onPressed: () {},
+              ),
+            ),
+          ],
+        ),
         backgroundColor: Colors.white,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center(
-                  child: Text(
-                    "Heyo, \n${user.email}",
-                    style: const TextStyle(
-                      fontSize: 20,
-                    ),
-                    textAlign: TextAlign.center,
+                const SizedBox(
+                  height: 80,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                  child: Column(
+                    children: [
+                      Text(
+                        "안녕하세요? \n${user.email}",
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                    ],
                   ),
                 ),
-                Center(
-                  child: IconButton(
-                    onPressed: logOut,
-                    icon: const Icon(
-                      Icons.logout_rounded,
-                    ),
+                const SafeArea(
+                  child: Center(
+                    child: KeySearchBar(),
                   ),
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 32),
+                  child: Column(
+                    children: [
+                      Text(
+                        "WITT 하이라이트",
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ),
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Sample(image: "assets/images/bus.jpg"),
+                    Sample(image: "assets/images/bus.jpg")
+                  ],
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 32),
+                  child: Column(
+                    children: [
+                      Text(
+                        "더 알아보기",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ),
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InfoCard(
+                      text: "info",
+                      bgColor: Colors.white,
+                      textColor: Color(0xFF292929),
+                      borderColor: Colors.grey,
+                    ),
+                    InfoCard(
+                      text: "info",
+                      bgColor: Colors.white,
+                      textColor: Color(0xFF292929),
+                      borderColor: Colors.grey,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(left: 32, right: 32),
+                  child: Divider(),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(right: 32),
+                      child: Text("Privacy"),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 32, right: 32),
+                      child: Text("Terms"),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 32),
+                      child: Text("About"),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(4),
+                      child: Image.asset(
+                        "assets/images/insta.png",
+                        width: 32,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4),
+                      child: Image.asset(
+                        "assets/images/pinterest.png",
+                        width: 32,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4),
+                      child: Image.asset(
+                        "assets/images/twitter.png",
+                        width: 32,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("© WITT, Inc. 2024. \nWe love our users!"),
+                  ],
+                ),
+                const SizedBox(
+                  height: 80,
                 )
               ],
             ),
@@ -45,7 +206,8 @@ class Home extends StatelessWidget {
         bottomNavigationBar: SizedBox(
           height: 90,
           child: BottomAppBar(
-            color: Colors.white,
+            color: const Color(0xFF45757B),
+            shadowColor: Colors.grey.shade100,
             child: Padding(
               padding: const EdgeInsets.only(
                 top: 8,
@@ -55,119 +217,63 @@ class Home extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        '/home',
-                      );
-                    },
-                    child: const Column(
-                      children: [
-                        Icon(
-                          Icons.home_outlined,
-                          color: Color(0xFF292929),
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          'Home',
-                          style: TextStyle(
-                            color: Color(0xFF292929),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        '/search',
-                      );
-                    },
-                    child: const Column(
-                      children: [
-                        Icon(
-                          Icons.explore_outlined,
-                          color: Color(0xFF292929),
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          'Search',
-                          style: TextStyle(
-                            color: Color(0xFF292929),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        '/camera',
-                      );
-                    },
-                    child: const Column(
-                      children: [
-                        Icon(
-                          Icons.camera_rounded,
-                          color: Color(0xFF292929),
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          'Camera',
-                          style: TextStyle(
-                            color: Color(0xFF292929),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        '/mypage',
-                      );
-                    },
-                    child: const Column(
-                      children: [
-                        Icon(
-                          Icons.cases_outlined,
-                          color: Color(0xFF292929),
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          'My Page',
-                          style: TextStyle(
-                            color: Color(0xFF292929),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  buildNavItem(Icons.home_outlined, 'Home', 0),
+                  buildNavItem(Icons.explore_outlined, 'Search', 1),
+                  buildNavItem(Icons.camera_rounded, 'Camera', 2),
+                  buildNavItem(Icons.cases_outlined, 'My Page', 3),
                 ],
               ),
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget buildNavItem(IconData icon, String label, int index) {
+    return GestureDetector(
+      onTap: () {
+        // 아이콘을 탭했을 때의 동작을 정의합니다.
+        setState(() {
+          _currentIndex = index;
+        });
+        switch (_currentIndex) {
+          case 0:
+            Navigator.pushNamed(context, '/home');
+            break;
+          case 1:
+            Navigator.pushNamed(context, '/search');
+            break;
+          case 2:
+            Navigator.pushNamed(context, '/camera');
+            break;
+          case 3:
+            Navigator.pushNamed(context, '/mypage');
+            break;
+        }
+      },
+      child: Column(
+        children: [
+          Icon(
+            icon,
+            color:
+                _currentIndex == index ? Colors.white : const Color(0xFF292929),
+            size: 28,
+          ),
+          const SizedBox(
+            height: 4,
+          ),
+          Text(
+            label,
+            style: TextStyle(
+              color: _currentIndex == index
+                  ? Colors.white
+                  : const Color(0xFF292929),
+              fontWeight: FontWeight.w400,
+              fontSize: 12,
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -2,7 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:login_auth/components/button.dart';
+import 'package:login_auth/components/auth_button.dart';
 import 'package:login_auth/components/square_tile.dart';
 import 'package:login_auth/components/textfield.dart';
 
@@ -139,9 +139,11 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(
                 height: 25,
               ),
-              MyButton(
-                text: "가입하기",
+              AuthButton(
                 onTap: signUserUp,
+                text: "Register",
+                bgColor: const Color(0xFF292929),
+                textColor: Colors.white,
               ),
               const SizedBox(
                 height: 40,
@@ -186,7 +188,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SquareTile(
-                    imagePath: 'images/google.png',
+                    imagePath: 'assets/images/google.png',
                   ),
                   SizedBox(
                     width: 25,
