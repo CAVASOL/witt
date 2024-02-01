@@ -2,10 +2,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:login_auth/widgets/widgets.dart';
 
-class Search extends StatelessWidget {
-  Search({super.key});
+class Search extends StatefulWidget {
+  const Search({super.key});
 
+  @override
+  State<Search> createState() => _SearchState();
+}
+
+class _SearchState extends State<Search> {
   final user = FirebaseAuth.instance.currentUser!;
+  int _currentIndex = 1;
 
   void logOut() {
     FirebaseAuth.instance.signOut();
@@ -32,7 +38,8 @@ class Search extends StatelessWidget {
         bottomNavigationBar: SizedBox(
           height: 90,
           child: BottomAppBar(
-            color: Colors.white,
+            color: const Color(0xFF45757B),
+            shadowColor: Colors.grey.shade100,
             child: Padding(
               padding: const EdgeInsets.only(
                 top: 8,
@@ -42,119 +49,63 @@ class Search extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        '/home',
-                      );
-                    },
-                    child: const Column(
-                      children: [
-                        Icon(
-                          Icons.home_outlined,
-                          color: Color(0xFF292929),
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          'Home',
-                          style: TextStyle(
-                            color: Color(0xFF292929),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        '/search',
-                      );
-                    },
-                    child: const Column(
-                      children: [
-                        Icon(
-                          Icons.explore_outlined,
-                          color: Color(0xFF292929),
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          'Search',
-                          style: TextStyle(
-                            color: Color(0xFF292929),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        '/camera',
-                      );
-                    },
-                    child: const Column(
-                      children: [
-                        Icon(
-                          Icons.camera_rounded,
-                          color: Color(0xFF292929),
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Text(
-                          'Camera',
-                          style: TextStyle(
-                            color: Color(0xFF292929),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        '/mypage',
-                      );
-                    },
-                    child: const Column(
-                      children: [
-                        Icon(
-                          Icons.cases_outlined,
-                          color: Color(0xFF292929),
-                        ),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        Text(
-                          'My Page',
-                          style: TextStyle(
-                            color: Color(0xFF292929),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  buildNavItem(Icons.home_outlined, 'Home', 0),
+                  buildNavItem(Icons.explore_outlined, 'Search', 1),
+                  buildNavItem(Icons.camera_rounded, 'Camera', 2),
+                  buildNavItem(Icons.cases_outlined, 'My Page', 3),
                 ],
               ),
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget buildNavItem(IconData icon, String label, int index) {
+    return GestureDetector(
+      onTap: () {
+        // 아이콘을 탭했을 때의 동작을 정의합니다.
+        setState(() {
+          _currentIndex = index;
+        });
+        switch (_currentIndex) {
+          case 0:
+            Navigator.pushNamed(context, '/home');
+            break;
+          case 1:
+            Navigator.pushNamed(context, '/search');
+            break;
+          case 2:
+            Navigator.pushNamed(context, '/camera');
+            break;
+          case 3:
+            Navigator.pushNamed(context, '/mypage');
+            break;
+        }
+      },
+      child: Column(
+        children: [
+          Icon(
+            icon,
+            color:
+                _currentIndex == index ? Colors.white : const Color(0xFF292929),
+            size: 28,
+          ),
+          const SizedBox(
+            height: 4,
+          ),
+          Text(
+            label,
+            style: TextStyle(
+              color: _currentIndex == index
+                  ? Colors.white
+                  : const Color(0xFF292929),
+              fontWeight: FontWeight.w400,
+              fontSize: 12,
+            ),
+          ),
+        ],
       ),
     );
   }

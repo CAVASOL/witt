@@ -2,7 +2,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:login_auth/components/button.dart';
+import 'package:login_auth/components/auth_button.dart';
 import 'package:login_auth/components/square_tile.dart';
 import 'package:login_auth/components/textfield.dart';
 
@@ -122,9 +122,9 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 10,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 25.0,
+              const Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 24,
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -132,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                     Text(
                       '비밀번호를 잊어버렸나요?',
                       style: TextStyle(
-                        color: Colors.grey.shade600,
+                        color: Color(0xFF292929),
                         fontSize: 14,
                         fontWeight: FontWeight.w200,
                       ),
@@ -143,9 +143,11 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 25,
               ),
-              MyButton(
-                text: "로그인",
+              AuthButton(
                 onTap: signUserIn,
+                text: "Login",
+                bgColor: const Color(0xFF292929),
+                textColor: Colors.white,
               ),
               const SizedBox(
                 height: 40,
@@ -220,7 +222,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: const Text(
                       'WITT 가입하기',
                       style: TextStyle(
-                        color: Color(0xFF45757B),
+                        color: Color(0xFF292929),
                         fontWeight: FontWeight.bold,
                       ),
                     ),

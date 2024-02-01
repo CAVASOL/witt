@@ -47,6 +47,8 @@ dependencies:
   url_launcher: ^6.2.4
   image: ^3.0.1
   google_nav_bar: ^5.0.6
+  flutter_svg: ^2.0.9
+  dotted_border: ^2.1.0
 
 dev_dependencies:
   flutter_test:

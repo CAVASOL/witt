@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class KeySearchBar extends StatelessWidget {
-  const KeySearchBar({super.key});
+class LocationSearchBar extends StatelessWidget {
+  const LocationSearchBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 28),
+      padding: const EdgeInsets.symmetric(horizontal: 30),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
           // boxShadow: [
           //   BoxShadow(
@@ -18,7 +18,7 @@ class KeySearchBar extends StatelessWidget {
           //     offset: const Offset(0, 3),
           //   ),
           // ],
-          borderRadius: BorderRadius.circular(32),
+          borderRadius: BorderRadius.circular(40),
           border: Border.all(color: Colors.grey, width: 0.2),
         ),
         child: Row(
@@ -36,14 +36,21 @@ class KeySearchBar extends StatelessWidget {
                         maxLines: 1,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: '키워드를 검색해 주세요.',
+                          hintText: '키워드를 검색해 주세요!',
                           hintStyle: TextStyle(
-                            color: Color(0xFF292929),
+                            color: Colors.black87,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
                     ),
+                    // Text(
+                    //   'Wherever & Whenever',
+                    //   style: TextStyle(
+                    //     color: Colors.grey,
+                    //     fontSize: 10,
+                    //   ),
+                    // ),
                   ],
                 )
               ],

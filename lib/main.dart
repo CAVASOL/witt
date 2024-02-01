@@ -32,10 +32,10 @@ class MyApp extends StatelessWidget {
         '/': (context) => const Welcome(),
         '/login': (context) => const Auth(),
         '/register': (context) => RegisterPage(onTap: onTap),
-        '/home': (context) => Home(),
-        '/search': (context) => Search(),
+        '/home': (context) => const Home(),
+        '/search': (context) => const Search(),
         '/camera': (context) => const PickImage(),
-        '/mypage': (context) => MyPage(),
+        '/mypage': (context) => const MyPage(),
       },
     );
   }

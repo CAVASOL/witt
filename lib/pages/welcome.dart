@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_auth/components/button.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({super.key});
@@ -20,29 +21,35 @@ class Welcome extends StatelessWidget {
                 height: 200,
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/login');
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  '/login',
+                );
               },
-              style: const ButtonStyle(
-                alignment: Alignment.center,
-              ),
-              child: const Text(
-                "로그인",
+              child: const Button(
+                text: "Login",
+                bgColor: Color(0xFF292929),
+                textColor: Colors.white,
+                borderColor: Color(0xFF292929),
               ),
             ),
             const SizedBox(
-              height: 20,
+              height: 16,
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/register');
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  '/login',
+                );
               },
-              style: const ButtonStyle(
-                alignment: Alignment.center,
-              ),
-              child: const Text(
-                "WITT 가입하기",
+              child: const Button(
+                text: "WITT 가입하기",
+                bgColor: Colors.white,
+                textColor: Color(0xFF292929),
+                borderColor: Colors.white,
               ),
             ),
             const SizedBox(
@@ -69,7 +76,7 @@ class Welcome extends StatelessWidget {
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
