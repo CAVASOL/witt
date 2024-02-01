@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class LocationSearchBar extends StatelessWidget {
-  const LocationSearchBar({super.key});
+class KeySearchBar extends StatelessWidget {
+  const KeySearchBar({super.key});
 
   @override
   Widget build(BuildContext context) {

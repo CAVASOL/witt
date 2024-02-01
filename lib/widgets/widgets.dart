@@ -1,1 +1,1 @@
-export 'package:login_auth/widgets/searchBar.dart';
+export 'package:login_auth/widgets/search_bar.dart';
