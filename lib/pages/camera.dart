@@ -2,6 +2,7 @@
 
 import 'dart:io' show File, Platform;
 import 'dart:typed_data';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:file_picker/file_picker.dart' as file_picker;
@@ -113,7 +114,7 @@ class _CameraPageState extends State<PickImage> {
                       height: 8,
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => _uploadImage(),
                       child: const Text("Submit"),
                     ),
                   ],
@@ -358,5 +359,31 @@ class _CameraPageState extends State<PickImage> {
       _image = File(returnImage.path).readAsBytesSync();
     });
     Navigator.of(context).pop();
+  }
+
+  Future<void> _uploadImage() async {
+    if (selectedImage == null) return;
+
+    String uploadUrl = "https://lalala/";
+    Dio dio = Dio();
+
+    try {
+      FormData formData = FormData.fromMap({
+        "file": await MultipartFile.fromFile(
+          selectedImage!.path,
+          filename: selectedImage!.path.split('/').last,
+        ),
+        "model_name": selectedModel,
+      });
+
+      Response response = await dio.post(
+        uploadUrl,
+        data: formData,
+      );
+
+      print("Server Response: ${response.data}");
+    } catch (e) {
+      print("Error uploading image: $e");
+    }
   }
 }
