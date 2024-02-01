@@ -74,12 +74,43 @@ class _CameraPageState extends State<PickImage> {
                     const SizedBox(
                       height: 12,
                     ),
+                    Form(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 64,
+                            ),
+                            child: DropdownButtonFormField(
+                              value: selectedModel,
+                              items: modelSelectionOptions
+                                  .map((selection) => DropdownMenuItem(
+                                        value: selection,
+                                        child: Text(selection),
+                                      ))
+                                  .toList(),
+                              onChanged: (value) {
+                                setState(() {
+                                  selectedModel = value.toString();
+                                });
+                              },
+                              decoration: const InputDecoration(
+                                labelText: "Select YOLO Model",
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
                     ElevatedButton(
                       onPressed: () => showImagePickerOption(context),
                       child: const Text("Import Image"),
                     ),
                     const SizedBox(
-                      height: 12,
+                      height: 8,
                     ),
                     ElevatedButton(
                       onPressed: () {},
