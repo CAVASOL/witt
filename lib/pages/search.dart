@@ -23,7 +23,7 @@ class Search extends StatelessWidget {
             SafeArea(
               child: SingleChildScrollView(
                 child: Center(
-                  child: LocationSearchBar(),
+                  child: KeySearchBar(),
                 ),
               ),
             ),
