@@ -22,11 +22,8 @@ class Search extends StatelessWidget {
           children: [
             SafeArea(
               child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    LocationSearchBar(),
-                  ],
+                child: Center(
+                  child: LocationSearchBar(),
                 ),
               ),
             ),
@@ -62,7 +59,7 @@ class Search extends StatelessWidget {
                           height: 4,
                         ),
                         Text(
-                          '홈',
+                          'Home',
                           style: TextStyle(
                             color: Color(0xFF292929),
                             fontWeight: FontWeight.w400,
@@ -89,7 +86,7 @@ class Search extends StatelessWidget {
                           height: 4,
                         ),
                         Text(
-                          '검색',
+                          'Search',
                           style: TextStyle(
                             color: Color(0xFF292929),
                             fontWeight: FontWeight.w400,
@@ -116,7 +113,7 @@ class Search extends StatelessWidget {
                           height: 8,
                         ),
                         Text(
-                          '카메라',
+                          'Camera',
                           style: TextStyle(
                             color: Color(0xFF292929),
                             fontWeight: FontWeight.w400,
@@ -136,14 +133,14 @@ class Search extends StatelessWidget {
                     child: const Column(
                       children: [
                         Icon(
-                          Icons.person_outline_rounded,
+                          Icons.cases_outlined,
                           color: Color(0xFF292929),
                         ),
                         SizedBox(
                           height: 4,
                         ),
                         Text(
-                          '나의 페이지',
+                          'My Page',
                           style: TextStyle(
                             color: Color(0xFF292929),
                             fontWeight: FontWeight.w400,
