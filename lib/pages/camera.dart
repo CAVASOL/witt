@@ -30,116 +30,63 @@ class _CameraPageState extends State<PickImage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Upload your image, \nand select a YOLO v5 model",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Stack(
-                    children: [
-                      _image != null
-                          ? Container(
-                              width: 280,
-                              height: 200,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.rectangle,
-                                color: Colors.grey.shade200,
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: MemoryImage(_image!),
-                                ),
-                              ),
-                            )
-                          : Container(
-                              width: 280,
-                              height: 200,
-                              color: Colors.grey.shade200,
-                            ),
-                      Positioned(
-                        bottom: -4,
-                        left: 232,
-                        child: IconButton(
-                          onPressed: () {
-                            showImagePickerOption(context);
-                          },
-                          icon: const Icon(
-                            Icons.add_a_photo,
-                          ),
-                          iconSize: 32,
-                        ),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Upload your image, \nand select a YOLO v5 model",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
-                    ],
-                  ),
-                  Form(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Stack(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: TextFormField(
-                            decoration: const InputDecoration(
-                              labelText: "Upload Images",
-                            ),
-                            keyboardType: TextInputType.multiline,
-                            maxLines: null,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: DropdownButtonFormField(
-                            value: selectedModel,
-                            items: modelSelectionOptions
-                                .map((selection) => DropdownMenuItem(
-                                      value: selection,
-                                      child: Text(selection),
-                                    ))
-                                .toList(),
-                            onChanged: (value) {
-                              setState(() {
-                                selectedModel = value.toString();
-                              });
-                            },
-                            decoration: const InputDecoration(
-                              labelText: "Select YOLO Model",
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: TextFormField(
-                            controller: imgSizeController,
-                            decoration: const InputDecoration(
-                              labelText: "Model Inference Size",
-                            ),
-                            keyboardType: TextInputType.number,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 16.0),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              // Handle form submission
-                            },
-                            child: const Text("Submit"),
-                          ),
-                        ),
+                        _image != null
+                            ? Container(
+                                width: 320,
+                                height: 360,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  color: Colors.grey.shade100,
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: MemoryImage(_image!),
+                                  ),
+                                ),
+                              )
+                            : Container(
+                                width: 320,
+                                height: 360,
+                                color: Colors.grey.shade200,
+                              ),
                       ],
                     ),
-                  ),
-                ],
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    ElevatedButton(
+                      onPressed: () => showImagePickerOption(context),
+                      child: const Text("Import Image"),
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: const Text("Submit"),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
