@@ -38,7 +38,7 @@ dependencies:
   firebase_auth: ^4.16.0
   firebase_core: ^2.24.2
   camera: ^0.10.5+9
-  dio: ^4.0.0
+  dio: ^5.0.0
   image_picker: ^0.8.5+3
   flutter_tflite: ^1.0.1
   file_picker: ^6.1.1
