@@ -24,8 +24,7 @@ class _CameraPageState extends State<PickImage> {
     "YOLO v5l",
     "YOLO v5x"
   ];
-  String selectedModel = "YOLO v5s";
-  TextEditingController imgSizeController = TextEditingController(text: "416");
+  String selectedModel = "YOLO v5x";
   int _currentIndex = 2;
 
   @override
@@ -184,7 +183,7 @@ class _CameraPageState extends State<PickImage> {
 
   void showImagePickerOption(BuildContext context) {
     showModalBottomSheet(
-      backgroundColor: Colors.amber.shade100,
+      backgroundColor: Colors.white,
       context: context,
       builder: (builder) {
         return Padding(
@@ -293,7 +292,7 @@ class _CameraPageState extends State<PickImage> {
   Future<void> _uploadImage() async {
     if (selectedImage == null) return;
 
-    String uploadUrl = "https://lalala/";
+    String uploadUrl = "http://172.30.1.81:8000/upload";
     Dio dio = Dio();
 
     try {

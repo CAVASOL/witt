@@ -141,20 +141,23 @@ class HomeState extends State<Home> {
                 const SizedBox(
                   height: 20,
                 ),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(right: 32),
-                      child: Text("Privacy"),
+                      padding: const EdgeInsets.only(right: 32),
+                      child: TextButton(
+                          onPressed: () {}, child: const Text("Privacy")),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 32, right: 32),
-                      child: Text("Terms"),
+                      padding: const EdgeInsets.only(left: 32, right: 32),
+                      child: TextButton(
+                          onPressed: () {}, child: const Text("Terms")),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 32),
-                      child: Text("About"),
+                      padding: const EdgeInsets.only(left: 32),
+                      child: TextButton(
+                          onPressed: () {}, child: const Text("About")),
                     ),
                   ],
                 ),
