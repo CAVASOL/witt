@@ -236,7 +236,6 @@ class HomeState extends State<Home> {
   Widget buildNavItem(IconData icon, String label, int index) {
     return GestureDetector(
       onTap: () {
-        // 아이콘을 탭했을 때의 동작을 정의합니다.
         setState(() {
           _currentIndex = index;
         });

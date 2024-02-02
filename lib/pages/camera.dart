@@ -196,9 +196,7 @@ class _CameraPageState extends State<PickImage> {
                 Expanded(
                   child: InkWell(
                     onTap: () {
-                      Platform.isMacOS
-                          ? _pickImageFromWeb()
-                          : _pickImageFromGallery();
+                      _pickImageFromGallery();
                     },
                     child: const SizedBox(
                       child: Column(
@@ -256,27 +254,27 @@ class _CameraPageState extends State<PickImage> {
     Navigator.of(context).pop();
   }
 
-  Future _pickImageFromWeb() async {
-    try {
-      final result = await file_picker.FilePicker.platform.pickFiles(
-        type: file_picker.FileType.custom,
-        allowedExtensions: ['jpg', 'jpeg', 'png'],
-      );
+  // Future _pickImageFromWeb() async {
+  //   try {
+  //     final result = await file_picker.FilePicker.platform.pickFiles(
+  //       type: file_picker.FileType.custom,
+  //       allowedExtensions: ['jpg', 'jpeg', 'png'],
+  //     );
 
-      if (result == null || result.files.isEmpty) {
-        return;
-      }
+  //     if (result == null || result.files.isEmpty) {
+  //       return;
+  //     }
 
-      final file = File(result.files.single.path!);
-      setState(() {
-        selectedImage = file;
-        _image = file.readAsBytesSync();
-      });
-    } catch (e) {
-      print("Error picking image from web: $e");
-    }
-    Navigator.of(context).pop();
-  }
+  //     final file = File(result.files.single.path!);
+  //     setState(() {
+  //       selectedImage = file;
+  //       _image = file.readAsBytesSync();
+  //     });
+  //   } catch (e) {
+  //     print("Error picking image from web: $e");
+  //   }
+  //   Navigator.of(context).pop();
+  // }
 
   Future _pickImageFromCamera() async {
     final returnImage =
@@ -318,7 +316,6 @@ class _CameraPageState extends State<PickImage> {
   Widget buildNavItem(IconData icon, String label, int index) {
     return GestureDetector(
       onTap: () {
-        // 아이콘을 탭했을 때의 동작을 정의합니다.
         setState(() {
           _currentIndex = index;
         });
