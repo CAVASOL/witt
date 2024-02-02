@@ -1,5 +1,10 @@
+// ignore_for_file: avoid_print
+
+import 'dart:io';
+import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({super.key});
@@ -42,7 +47,13 @@ class _MyPageState extends State<MyPage> {
                     Icons.logout_rounded,
                   ),
                 ),
-              )
+              ),
+              TextButton(
+                onPressed: () {
+                  uploadImage('image', File('assets/images/city_street.jpg'));
+                },
+                child: const Text("Upload"),
+              ),
             ],
           ),
         ),
@@ -119,5 +130,55 @@ class _MyPageState extends State<MyPage> {
         ],
       ),
     );
+  }
+}
+
+Future<void> uploadImage(String title, File file) async {
+  const String urlToInsertImage = "https://127.0.0.1:8000/upload";
+  var request = http.MultipartRequest("POST", Uri.parse(urlToInsertImage));
+
+  // Add any necessary fields to the request
+  request.fields['title'] = title;
+
+  // Add the image file to the request
+  request.files.add(http.MultipartFile.fromBytes(
+    'image',
+    file.readAsBytesSync(),
+    filename: file.path.split('/').last, // Use the filename from the path
+  ));
+
+  try {
+    var response = await request.send();
+    if (response.statusCode == 200) {
+      // Image uploaded successfully, handle the response here
+      print("Image uploaded successfully");
+      print(await response.stream.bytesToString());
+    } else {
+      // Handle the error
+      print("Failed to upload image. Status code: ${response.statusCode}");
+    }
+  } catch (error) {
+    // Handle any exceptions that occur during the HTTP request
+    print("Error uploading image: $error");
+  }
+}
+
+Future<void> pickAndUploadImage() async {
+  try {
+    File imageFile = await getImage();
+    // You can use any title you want
+    await uploadImage('Image from Camera', imageFile);
+  } catch (error) {
+    print("Error picking and uploading image: $error");
+  }
+}
+
+Future<File> getImage() async {
+  final ImagePicker picker = ImagePicker();
+  final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+  if (image != null) {
+    return File(image.path);
+  } else {
+    throw Exception("Image selection canceled");
   }
 }
