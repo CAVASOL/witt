@@ -12,7 +12,7 @@ class Welcome extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(
-              height: 240,
+              height: 320,
             ),
             Center(
               child: Image.asset(
@@ -55,19 +55,19 @@ class Welcome extends StatelessWidget {
             const SizedBox(
               height: 64,
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   'Countinue as',
                   style: TextStyle(
-                    color: Colors.grey[700],
+                    color: Color(0xFF34767C),
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   width: 4,
                 ),
-                const Text(
+                Text(
                   'a Guest',
                   style: TextStyle(
                     color: Color(0xFF45757B),
