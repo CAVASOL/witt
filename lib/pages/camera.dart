@@ -291,7 +291,7 @@ class _CameraPageState extends State<PickImage> {
   Future<void> _uploadImage() async {
     if (selectedImage == null) return;
 
-    String uploadUrl = "http://172.30.1.67:8000/detect";
+    String uploadUrl = "http://172.30.1.67:8000/images";
     Dio dio = Dio();
 
     try {
