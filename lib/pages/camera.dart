@@ -1,11 +1,12 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously
 
-import 'dart:io' show File, Platform;
+import 'dart:io' show File;
 import 'dart:typed_data';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:file_picker/file_picker.dart' as file_picker;
+import 'package:logger/logger.dart';
 import 'package:login_auth/components/button.dart';
 
 class PickImage extends StatefulWidget {
@@ -196,7 +197,7 @@ class _CameraPageState extends State<PickImage> {
                 Expanded(
                   child: InkWell(
                     onTap: () {
-                      _pickImageFromGallery();
+                      _pickImageFromWeb();
                     },
                     child: const SizedBox(
                       child: Column(
@@ -243,38 +244,38 @@ class _CameraPageState extends State<PickImage> {
     );
   }
 
-  Future _pickImageFromGallery() async {
-    final returnImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (returnImage == null) return;
-    setState(() {
-      selectedImage = File(returnImage.path);
-      _image = File(returnImage.path).readAsBytesSync();
-    });
-    Navigator.of(context).pop();
-  }
-
-  // Future _pickImageFromWeb() async {
-  //   try {
-  //     final result = await file_picker.FilePicker.platform.pickFiles(
-  //       type: file_picker.FileType.custom,
-  //       allowedExtensions: ['jpg', 'jpeg', 'png'],
-  //     );
-
-  //     if (result == null || result.files.isEmpty) {
-  //       return;
-  //     }
-
-  //     final file = File(result.files.single.path!);
-  //     setState(() {
-  //       selectedImage = file;
-  //       _image = file.readAsBytesSync();
-  //     });
-  //   } catch (e) {
-  //     print("Error picking image from web: $e");
-  //   }
+  // Future _pickImageFromGallery() async {
+  //   final returnImage =
+  //       await ImagePicker().pickImage(source: ImageSource.gallery);
+  //   if (returnImage == null) return;
+  //   setState(() {
+  //     selectedImage = File(returnImage.path);
+  //     _image = File(returnImage.path).readAsBytesSync();
+  //   });
   //   Navigator.of(context).pop();
   // }
+
+  Future _pickImageFromWeb() async {
+    try {
+      final result = await file_picker.FilePicker.platform.pickFiles(
+        type: file_picker.FileType.custom,
+        allowedExtensions: ['jpg', 'jpeg', 'png'],
+      );
+
+      if (result == null || result.files.isEmpty) {
+        return;
+      }
+
+      final file = File(result.files.single.path!);
+      setState(() {
+        selectedImage = file;
+        _image = file.readAsBytesSync();
+      });
+    } catch (e) {
+      print("Error picking image from web: $e");
+    }
+    Navigator.of(context).pop();
+  }
 
   Future _pickImageFromCamera() async {
     final returnImage =
@@ -290,7 +291,7 @@ class _CameraPageState extends State<PickImage> {
   Future<void> _uploadImage() async {
     if (selectedImage == null) return;
 
-    String uploadUrl = "http://172.30.1.81:8000/upload";
+    String uploadUrl = "http://172.30.1.67:8000/detect";
     Dio dio = Dio();
 
     try {
@@ -306,9 +307,10 @@ class _CameraPageState extends State<PickImage> {
         uploadUrl,
         data: formData,
       );
-
+      Logger().e(response);
       print("Server Response: ${response.data}");
     } catch (e) {
+      Logger().e(e);
       print("Error uploading image: $e");
     }
   }
