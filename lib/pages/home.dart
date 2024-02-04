@@ -132,7 +132,7 @@ class HomeState extends State<Home> {
                   ],
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 40,
                 ),
                 const Padding(
                   padding: EdgeInsets.only(left: 32, right: 32),
@@ -147,17 +147,32 @@ class HomeState extends State<Home> {
                     Padding(
                       padding: const EdgeInsets.only(right: 32),
                       child: TextButton(
-                          onPressed: () {}, child: const Text("Privacy")),
+                        onPressed: () {},
+                        child: const Text(
+                          "Privacy",
+                          style: TextStyle(color: Color(0xFF292929)),
+                        ),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 32, right: 32),
                       child: TextButton(
-                          onPressed: () {}, child: const Text("Terms")),
+                        onPressed: () {},
+                        child: const Text(
+                          "Terms",
+                          style: TextStyle(color: Color(0xFF292929)),
+                        ),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 32),
                       child: TextButton(
-                          onPressed: () {}, child: const Text("About")),
+                        onPressed: () {},
+                        child: const Text(
+                          "About",
+                          style: TextStyle(color: Color(0xFF292929)),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -196,7 +211,10 @@ class HomeState extends State<Home> {
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("© WITT, Inc. 2024. \nWe love our users!"),
+                    Text(
+                      "© WITT, Inc. 2024. \nWe love our users!",
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
                   ],
                 ),
                 const SizedBox(
