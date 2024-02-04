@@ -61,7 +61,7 @@ class Welcome extends StatelessWidget {
                 Text(
                   'Countinue as',
                   style: TextStyle(
-                    color: Color(0xFF34767C),
+                    color: Color(0xFF292929),
                   ),
                 ),
                 SizedBox(
@@ -70,7 +70,7 @@ class Welcome extends StatelessWidget {
                 Text(
                   'a Guest',
                   style: TextStyle(
-                    color: Color(0xFF45757B),
+                    color: Color(0xFF292929),
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
                   ),

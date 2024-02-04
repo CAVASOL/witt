@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print, use_build_context_synchronously
+// ignore_for_file: avoid_print, use_build_context_synchronously, unnecessary_null_comparison
 
 import 'dart:io' show File;
 import 'dart:typed_data';
@@ -20,14 +20,8 @@ class PickImage extends StatefulWidget {
 class _CameraPageState extends State<PickImage> {
   Uint8List? _image;
   File? selectedImage;
-  List<String> modelSelectionOptions = [
-    "YOLO v5s",
-    "YOLO v5m",
-    "YOLO v5l",
-    "YOLO v5x"
-  ];
-  String selectedModel = "YOLO v5x";
-  List<dynamic> imageDetail = [];
+  String selectedModel = "yolov5x";
+  List<dynamic> classNames = [];
   int _currentIndex = 2;
 
   @override
@@ -45,6 +39,9 @@ class _CameraPageState extends State<PickImage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      const SizedBox(
+                        height: 40,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
@@ -100,59 +97,76 @@ class _CameraPageState extends State<PickImage> {
                       const SizedBox(
                         height: 12,
                       ),
-                      Form(
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 64,
-                              ),
-                              child: DropdownButtonFormField(
-                                value: selectedModel,
-                                items: modelSelectionOptions
-                                    .map((selection) => DropdownMenuItem(
-                                          value: selection,
-                                          child: Text(selection),
-                                        ))
-                                    .toList(),
-                                onChanged: (value) {
-                                  setState(() {
-                                    selectedModel = value.toString();
-                                  });
-                                },
-                                decoration: const InputDecoration(
-                                  labelText: "Select YOLO Model",
-                                ),
-                              ),
+                      Column(
+                        children: [
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          InkWell(
+                            onTap: () => showImagePickerOption(context),
+                            child: const Button(
+                              text: "Import Image",
+                              bgColor: Colors.white,
+                              textColor: Color(0xFF292929),
+                              borderColor: Colors.grey,
                             ),
-                            const SizedBox(
-                              height: 12,
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          InkWell(
+                            onTap: () => _uploadImage(),
+                            child: const Button(
+                              text: "Submit",
+                              bgColor: Color(0xFF292929),
+                              textColor: Colors.white,
+                              borderColor: Color(0xFF292929),
                             ),
-                            InkWell(
-                              onTap: () => showImagePickerOption(context),
-                              child: const Button(
-                                text: "Import Image",
-                                bgColor: Colors.white,
-                                textColor: Color(0xFF292929),
-                                borderColor: Colors.grey,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            InkWell(
-                              onTap: () => _uploadImage(),
-                              child: const Button(
-                                text: "Submit",
-                                bgColor: Color(0xFF292929),
-                                textColor: Colors.white,
-                                borderColor: Color(0xFF292929),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      Text(imageDetail.toString()),
+                      if (classNames != null && classNames.isNotEmpty)
+                        Column(
+                          children: [
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                              width: 320,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              padding: const EdgeInsets.all(10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "Result:",
+                                    style: TextStyle(
+                                      color: Color(0xFF292929),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(
+                                    classNames.join('\n'),
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 80,
+                            )
+                          ],
+                        )
+                      else
+                        Container(),
                     ],
                   ),
                 ),
@@ -177,7 +191,7 @@ class _CameraPageState extends State<PickImage> {
                   buildNavItem(Icons.home_outlined, 'Home', 0),
                   buildNavItem(Icons.explore_outlined, 'Search', 1),
                   buildNavItem(Icons.camera_rounded, 'Camera', 2),
-                  buildNavItem(Icons.cases_outlined, 'My Page', 3),
+                  buildNavItem(Icons.person_outline_rounded, 'My Page', 3),
                 ],
               ),
             ),
@@ -316,78 +330,31 @@ class _CameraPageState extends State<PickImage> {
       Logger().e(uploadResponse);
       print("Server Response: ${uploadResponse.data}");
 
+      // if (uploadResponse.statusCode == 200) {
+      //   setState(() {
+      //     // Extract class_name values and store them in classNames list
+      //     classNames = List<dynamic>.from(uploadResponse.data[0]
+      //         .map((item) => item["class_name"].toString()));
+      //     print(classNames);
+      //   });
+      // }
+
       if (uploadResponse.statusCode == 200) {
         setState(() {
-          imageDetail = uploadResponse.data;
-          print(imageDetail);
+          classNames = List<dynamic>.from(
+            Set<String>.from(
+              uploadResponse.data[0]
+                  .map((item) => item["class_name"].toString()),
+            ),
+          );
+          print(classNames);
         });
       }
-
-      // dynamic imageIdentifier = uploadResponse.data[["class_name"]];
-
-      // String getResultUrl = "http://172.30.1.67:8000/image";
-      // Response getResultResponse = await dio.get(getResultUrl);
-
-      // Logger().e(getResultResponse);
-      // print("Get Result Response: ${getResultResponse.data}");
     } catch (e) {
       Logger().e(e);
       print("Error uploading image: $e");
     }
   }
-
-  // Future<void> _uploadImage() async {
-  //   if (selectedImage == null) return;
-
-  //   String uploadUrl = "http://172.30.1.67:8000/image";
-
-  //   try {
-  //     var request = http.MultipartRequest('POST', Uri.parse(uploadUrl));
-  //     request.files.add(
-  //       await http.MultipartFile.fromPath(
-  //         'file',
-  //         selectedImage!.path,
-  //         filename: selectedImage!.path.split('/').last,
-  //       ),
-  //     );
-  //     request.fields['model_name'] = selectedModel;
-
-  //     var response = await request.send();
-
-  //     if (response.statusCode == 200) {
-  //       // Assuming the server responds with JSON data
-  //       var responseData = await response.stream.toBytes();
-  //       var decodedData = jsonDecode(utf8.decode(responseData));
-  //       setState(() {
-  //         imageDetail = decodedData['class_name'];
-  //       });
-
-  //       print("Server Response: $imageDetail");
-  //     } else {
-  //       print("Failed to upload image. Status code: ${response.statusCode}");
-  //     }
-  //   } catch (e) {
-  //     print("Error uploading image: $e");
-  //   }
-  // }
-
-  // void getImageDetail() async {
-  //   final url = Uri.parse("http://172.30.1.67:8000/image");
-  //   final response = await http.get(url);
-  //   try {
-  //     if (response.statusCode == 200) {
-  //       final List<dynamic> imageDetail = jsonDecode(response.body);
-  //       print("--------------------");
-  //       print(imageDetail);
-  //       return;
-  //     } else {
-  //       print(
-  //           "Failed to fetch image detail. Status code: ${response.statusCode}");
-  //     }
-  //   } catch (e) {
-  //     print("Error fetching image detail: $e");
-  //   }
-  // }
 
   Widget buildNavItem(IconData icon, String label, int index) {
     return GestureDetector(
