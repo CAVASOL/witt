@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:login_auth/components/auth_button.dart';
 import 'package:login_auth/components/square_tile.dart';
 import 'package:login_auth/components/textfield.dart';
+import 'package:login_auth/services/auth_service.dart';
 
 class RegisterPage extends StatefulWidget {
   final Function()? onTap;
@@ -76,12 +77,12 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
-        child: SingleChildScrollView(
+        child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
-                height: 160,
+                height: 80,
               ),
               const Padding(
                 padding: EdgeInsets.only(
@@ -184,18 +185,13 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(
                 height: 40,
               ),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SquareTile(
+                    onTap: () => AuthService().signInWithGoogle(),
                     imagePath: 'assets/images/google.png',
                   ),
-                  SizedBox(
-                    width: 25,
-                  ),
-                  // SquareTile(
-                  //   imagePath: 'images/apple.png',
-                  // )
                 ],
               ),
               const SizedBox(
@@ -218,11 +214,14 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: const Text(
                       '로그인하기',
                       style: TextStyle(
-                        color: Color(0xFF45757B),
+                        color: Color(0xFF292929),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
+                  const SizedBox(
+                    height: 80,
+                  )
                 ],
               )
             ],

@@ -2,6 +2,7 @@
 
 import 'dart:io' show File;
 import 'dart:typed_data';
+// import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -26,6 +27,7 @@ class _CameraPageState extends State<PickImage> {
     "YOLO v5x"
   ];
   String selectedModel = "YOLO v5x";
+  List<dynamic> imageDetail = [];
   int _currentIndex = 2;
 
   @override
@@ -34,122 +36,125 @@ class _CameraPageState extends State<PickImage> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.white,
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: SafeArea(
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: Container(
-                            padding: const EdgeInsets.all(
-                              4,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(
-                                style: BorderStyle.solid,
-                                color: Colors.grey.shade300,
-                              ),
-                              borderRadius: BorderRadius.circular(
-                                20,
-                              ),
-                            ),
-                            child: const Icon(
-                              Icons.arrow_back_rounded,
-                              color: Color(0xFF292929),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    Stack(
-                      children: [
-                        _image != null
-                            ? Container(
-                                width: 320,
-                                height: 360,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.rectangle,
-                                  color: Colors.grey.shade100,
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: MemoryImage(_image!),
-                                  ),
-                                ),
-                              )
-                            : Container(
-                                width: 320,
-                                height: 360,
-                                color: Colors.grey.shade200,
-                              ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    Form(
-                      child: Column(
+        body: SingleChildScrollView(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: SafeArea(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 64,
-                            ),
-                            child: DropdownButtonFormField(
-                              value: selectedModel,
-                              items: modelSelectionOptions
-                                  .map((selection) => DropdownMenuItem(
-                                        value: selection,
-                                        child: Text(selection),
-                                      ))
-                                  .toList(),
-                              onChanged: (value) {
-                                setState(() {
-                                  selectedModel = value.toString();
-                                });
-                              },
-                              decoration: const InputDecoration(
-                                labelText: "Select YOLO Model",
+                            padding: const EdgeInsets.only(left: 20),
+                            child: Container(
+                              padding: const EdgeInsets.all(
+                                4,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                border: Border.all(
+                                  style: BorderStyle.solid,
+                                  color: Colors.grey.shade300,
+                                ),
+                                borderRadius: BorderRadius.circular(
+                                  20,
+                                ),
+                              ),
+                              child: const Icon(
+                                Icons.arrow_back_rounded,
+                                color: Color(0xFF292929),
                               ),
                             ),
                           ),
                         ],
                       ),
-                    ),
-                    const SizedBox(
-                      height: 12,
-                    ),
-                    InkWell(
-                      onTap: () => showImagePickerOption(context),
-                      child: const Button(
-                        text: "Import Image",
-                        bgColor: Colors.white,
-                        textColor: Color(0xFF292929),
-                        borderColor: Colors.grey,
+                      const SizedBox(
+                        height: 12,
                       ),
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    InkWell(
-                      onTap: () => _uploadImage(),
-                      child: const Button(
-                        text: "Submit",
-                        bgColor: Color(0xFF292929),
-                        textColor: Colors.white,
-                        borderColor: Color(0xFF292929),
+                      Stack(
+                        children: [
+                          _image != null
+                              ? Container(
+                                  width: 320,
+                                  height: 360,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.rectangle,
+                                    color: Colors.grey.shade100,
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: MemoryImage(_image!),
+                                    ),
+                                  ),
+                                )
+                              : Container(
+                                  width: 320,
+                                  height: 360,
+                                  color: Colors.grey.shade200,
+                                ),
+                        ],
                       ),
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      Form(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 64,
+                              ),
+                              child: DropdownButtonFormField(
+                                value: selectedModel,
+                                items: modelSelectionOptions
+                                    .map((selection) => DropdownMenuItem(
+                                          value: selection,
+                                          child: Text(selection),
+                                        ))
+                                    .toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    selectedModel = value.toString();
+                                  });
+                                },
+                                decoration: const InputDecoration(
+                                  labelText: "Select YOLO Model",
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            InkWell(
+                              onTap: () => showImagePickerOption(context),
+                              child: const Button(
+                                text: "Import Image",
+                                bgColor: Colors.white,
+                                textColor: Color(0xFF292929),
+                                borderColor: Colors.grey,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            InkWell(
+                              onTap: () => _uploadImage(),
+                              child: const Button(
+                                text: "Submit",
+                                bgColor: Color(0xFF292929),
+                                textColor: Colors.white,
+                                borderColor: Color(0xFF292929),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Text(imageDetail.toString()),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -291,7 +296,7 @@ class _CameraPageState extends State<PickImage> {
   Future<void> _uploadImage() async {
     if (selectedImage == null) return;
 
-    String uploadUrl = "http://172.30.1.67:8000/images";
+    String uploadUrl = "http://172.30.1.60:8000/image";
     Dio dio = Dio();
 
     try {
@@ -303,17 +308,86 @@ class _CameraPageState extends State<PickImage> {
         "model_name": selectedModel,
       });
 
-      Response response = await dio.post(
+      Response uploadResponse = await dio.post(
         uploadUrl,
         data: formData,
       );
-      Logger().e(response);
-      print("Server Response: ${response.data}");
+
+      Logger().e(uploadResponse);
+      print("Server Response: ${uploadResponse.data}");
+
+      if (uploadResponse.statusCode == 200) {
+        setState(() {
+          imageDetail = uploadResponse.data;
+          print(imageDetail);
+        });
+      }
+
+      // dynamic imageIdentifier = uploadResponse.data[["class_name"]];
+
+      // String getResultUrl = "http://172.30.1.67:8000/image";
+      // Response getResultResponse = await dio.get(getResultUrl);
+
+      // Logger().e(getResultResponse);
+      // print("Get Result Response: ${getResultResponse.data}");
     } catch (e) {
       Logger().e(e);
       print("Error uploading image: $e");
     }
   }
+
+  // Future<void> _uploadImage() async {
+  //   if (selectedImage == null) return;
+
+  //   String uploadUrl = "http://172.30.1.67:8000/image";
+
+  //   try {
+  //     var request = http.MultipartRequest('POST', Uri.parse(uploadUrl));
+  //     request.files.add(
+  //       await http.MultipartFile.fromPath(
+  //         'file',
+  //         selectedImage!.path,
+  //         filename: selectedImage!.path.split('/').last,
+  //       ),
+  //     );
+  //     request.fields['model_name'] = selectedModel;
+
+  //     var response = await request.send();
+
+  //     if (response.statusCode == 200) {
+  //       // Assuming the server responds with JSON data
+  //       var responseData = await response.stream.toBytes();
+  //       var decodedData = jsonDecode(utf8.decode(responseData));
+  //       setState(() {
+  //         imageDetail = decodedData['class_name'];
+  //       });
+
+  //       print("Server Response: $imageDetail");
+  //     } else {
+  //       print("Failed to upload image. Status code: ${response.statusCode}");
+  //     }
+  //   } catch (e) {
+  //     print("Error uploading image: $e");
+  //   }
+  // }
+
+  // void getImageDetail() async {
+  //   final url = Uri.parse("http://172.30.1.67:8000/image");
+  //   final response = await http.get(url);
+  //   try {
+  //     if (response.statusCode == 200) {
+  //       final List<dynamic> imageDetail = jsonDecode(response.body);
+  //       print("--------------------");
+  //       print(imageDetail);
+  //       return;
+  //     } else {
+  //       print(
+  //           "Failed to fetch image detail. Status code: ${response.statusCode}");
+  //     }
+  //   } catch (e) {
+  //     print("Error fetching image detail: $e");
+  //   }
+  // }
 
   Widget buildNavItem(IconData icon, String label, int index) {
     return GestureDetector(
