@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:login_auth/widgets/widgets.dart';
 
@@ -10,12 +9,7 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  final user = FirebaseAuth.instance.currentUser!;
   int _currentIndex = 1;
-
-  void logOut() {
-    FirebaseAuth.instance.signOut();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +46,7 @@ class _SearchState extends State<Search> {
                   buildNavItem(Icons.home_outlined, 'Home', 0),
                   buildNavItem(Icons.explore_outlined, 'Search', 1),
                   buildNavItem(Icons.camera_rounded, 'Camera', 2),
-                  buildNavItem(Icons.cases_outlined, 'My Page', 3),
+                  buildNavItem(Icons.person_outline_rounded, 'My Page', 3),
                 ],
               ),
             ),
