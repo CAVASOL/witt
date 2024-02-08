@@ -22,7 +22,10 @@ class _CameraPageState extends State<PickImage> {
   File? selectedImage;
   String selectedModel = "yolov5x";
   List<dynamic> classNames = [];
+  List<dynamic> boundingBox = [];
   int _currentIndex = 2;
+  int imageHeight = 1;
+  int imageWidth = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -92,6 +95,24 @@ class _CameraPageState extends State<PickImage> {
                                   height: 360,
                                   color: Colors.grey.shade200,
                                 ),
+                          for (var box in boundingBox)
+                            Positioned(
+                              left: box[0].toDouble() * imageWidth,
+                              top: box[1].toDouble() * imageHeight,
+                              child: Container(
+                                width: (box[2].toDouble() - box[0].toDouble()) *
+                                    imageWidth,
+                                height:
+                                    (box[3].toDouble() - box[1].toDouble()) *
+                                        imageHeight,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.white,
+                                    width: 2,
+                                  ),
+                                ),
+                              ),
+                            )
                         ],
                       ),
                       const SizedBox(
@@ -216,7 +237,7 @@ class _CameraPageState extends State<PickImage> {
                 Expanded(
                   child: InkWell(
                     onTap: () {
-                      _pickImageFromWeb();
+                      _pickImageFromGallery();
                     },
                     child: const SizedBox(
                       child: Column(
@@ -263,38 +284,48 @@ class _CameraPageState extends State<PickImage> {
     );
   }
 
-  // Future _pickImageFromGallery() async {
-  //   final returnImage =
-  //       await ImagePicker().pickImage(source: ImageSource.gallery);
-  //   if (returnImage == null) return;
-  //   setState(() {
-  //     selectedImage = File(returnImage.path);
-  //     _image = File(returnImage.path).readAsBytesSync();
-  //   });
-  //   Navigator.of(context).pop();
-  // }
+  Future _pickImageFromGallery() async {
+    final returnImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
 
-  Future _pickImageFromWeb() async {
-    try {
-      final result = await file_picker.FilePicker.platform.pickFiles(
-        type: file_picker.FileType.custom,
-        allowedExtensions: ['jpg', 'jpeg', 'png'],
-      );
+    if (returnImage == null) return;
+    setState(() {
+      selectedImage = File(returnImage.path);
+      _image = File(returnImage.path).readAsBytesSync();
+    });
 
-      if (result == null || result.files.isEmpty) {
-        return;
-      }
+    final image = File(returnImage.path);
 
-      final file = File(result.files.single.path!);
-      setState(() {
-        selectedImage = file;
-        _image = file.readAsBytesSync();
-      });
-    } catch (e) {
-      print("Error picking image from web: $e");
-    }
+    final decodedImage = await decodeImageFromList(image.readAsBytesSync());
+    final int imageHeight = decodedImage.height;
+    final int imageWidth = decodedImage.width;
+
+    print('Image width: $imageHeight, height: $imageWidth');
     Navigator.of(context).pop();
   }
+
+  // Future _pickImageFromWeb() async {
+  //   try {
+  //     final result = await file_picker.FilePicker.platform.pickFiles(
+  //       type: file_picker.FileType.custom,
+  //       allowedExtensions: ['jpg', 'jpeg', 'png'],
+  //     );
+
+  //     if (result == null || result.files.isEmpty) {
+  //       return;
+  //     }
+
+  //     final file = File(result.files.single.path!);
+
+  //     setState(() {
+  //       selectedImage = file;
+  //       _image = file.readAsBytesSync();
+  //     });
+  //   } catch (e) {
+  //     print("Error picking image from web: $e");
+  //   }
+  //   Navigator.of(context).pop();
+  // }
 
   Future _pickImageFromCamera() async {
     final returnImage =
@@ -310,7 +341,7 @@ class _CameraPageState extends State<PickImage> {
   Future<void> _uploadImage() async {
     if (selectedImage == null) return;
 
-    String uploadUrl = "http://172.30.1.60:8000/image";
+    String uploadUrl = "http://172.30.1.29:8000/image";
     Dio dio = Dio();
 
     try {
@@ -340,15 +371,22 @@ class _CameraPageState extends State<PickImage> {
       // }
 
       if (uploadResponse.statusCode == 200) {
-        setState(() {
-          classNames = List<dynamic>.from(
-            Set<String>.from(
-              uploadResponse.data[0]
-                  .map((item) => item["class_name"].toString()),
-            ),
-          );
-          print(classNames);
-        });
+        setState(
+          () {
+            classNames = List<dynamic>.from(
+              Set<String>.from(
+                uploadResponse.data[0]
+                    .map((item) => item["class_name"].toString()),
+              ),
+            );
+
+            boundingBox = List<dynamic>.from(
+              uploadResponse.data[0].map((item) => item["bbox"]),
+            );
+
+            print(boundingBox);
+          },
+        );
       }
     } catch (e) {
       Logger().e(e);

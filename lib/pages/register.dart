@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:login_auth/components/auth_button.dart';
 import 'package:login_auth/components/square_tile.dart';
 import 'package:login_auth/components/textfield.dart';
+import 'package:login_auth/services/assets_manager.dart';
 import 'package:login_auth/services/auth_service.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -190,7 +191,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 children: [
                   SquareTile(
                     onTap: () => AuthService().signInWithGoogle(),
-                    imagePath: 'assets/images/google.png',
+                    imagePath: AssetsManager.googleLogo,
                   ),
                 ],
               ),

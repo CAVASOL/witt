@@ -28,7 +28,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'WITT',
-      theme: ThemeData(fontFamily: 'NotoSansKR'),
+      theme: ThemeData(
+        fontFamily: 'NotoSansKR',
+        scaffoldBackgroundColor: Colors.white,
+      ),
       routes: {
         '/': (context) => const Welcome(),
         '/login': (context) => const Auth(),
