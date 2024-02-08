@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:login_auth/components/info_card.dart';
 import 'package:login_auth/components/sample.dart';
+import 'package:login_auth/services/assets_manager.dart';
 import 'package:login_auth/widgets/widgets.dart';
 
 class Home extends StatefulWidget {
@@ -98,11 +99,11 @@ class HomeState extends State<Home> {
                     ],
                   ),
                 ),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Sample(image: "assets/images/bus.jpg"),
-                    Sample(image: "assets/images/bus.jpg")
+                    Sample(image: AssetsManager.busPicture),
+                    Sample(image: AssetsManager.busPicture)
                   ],
                 ),
                 const SizedBox(
@@ -197,21 +198,21 @@ class HomeState extends State<Home> {
                     Padding(
                       padding: const EdgeInsets.all(4),
                       child: Image.asset(
-                        "assets/images/insta.png",
+                        AssetsManager.instaLogo,
                         width: 32,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(4),
                       child: Image.asset(
-                        "assets/images/pinterest.png",
+                        AssetsManager.pinterestLogo,
                         width: 32,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(4),
                       child: Image.asset(
-                        "assets/images/twitter.png",
+                        AssetsManager.twitterLogo,
                         width: 32,
                       ),
                     ),

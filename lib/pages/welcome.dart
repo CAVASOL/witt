@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_auth/components/button.dart';
+import 'package:login_auth/services/assets_manager.dart';
 
 class Welcome extends StatelessWidget {
   const Welcome({super.key});
@@ -16,7 +17,7 @@ class Welcome extends StatelessWidget {
             ),
             Center(
               child: Image.asset(
-                'assets/images/sam18.png',
+                AssetsManager.wittLogo,
                 width: 200,
                 height: 200,
               ),

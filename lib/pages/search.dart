@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:login_auth/widgets/widgets.dart';
+// import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:login_auth/services/assets_manager.dart';
 
 class Search extends StatefulWidget {
   const Search({super.key});
@@ -10,6 +11,21 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   int _currentIndex = 1;
+  // final bool _isTyping = true;
+
+  late TextEditingController textEditingController;
+
+  @override
+  void initState() {
+    textEditingController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    textEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,17 +33,39 @@ class _SearchState extends State<Search> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.white,
-        body: const Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SafeArea(
-              child: SingleChildScrollView(
-                child: Center(
-                  child: KeySearchBar(),
-                ),
-              ),
+        appBar: AppBar(
+          elevation: 2,
+          leading: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Image.asset(AssetsManager.chatGPT),
+          ),
+          title: const Text(
+            "ChatGPT",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+          ),
+        ),
+        body: const SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                // Flexible(
+                //   child: ListView.builder(
+                //     itemCount: 6,
+                //     itemBuilder: (context, index) {
+                //       return const Text("heyo");
+                //     },
+                //   ),
+                // ),
+                Text("heyo"),
+                // if (_isTyping) ...[
+                //   const SpinKitThreeBounce(
+                //     color: Colors.white,
+                //     size: 16,
+                //   )
+                // ]
+              ],
             ),
-          ],
+          ),
         ),
         bottomNavigationBar: SizedBox(
           height: 90,

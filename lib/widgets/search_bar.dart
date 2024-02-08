@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_auth/services/assets_manager.dart';
 
 class KeySearchBar extends StatelessWidget {
   const KeySearchBar({super.key});
@@ -56,7 +57,7 @@ class KeySearchBar extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Image.asset(
-                'assets/images/filter.png',
+                AssetsManager.filterImg,
                 height: 20,
                 width: 20,
               ),
