@@ -23,14 +23,10 @@ class Sample extends StatelessWidget {
                 BoxShadow(
                   blurRadius: 10,
                   offset: const Offset(2, 0),
-                  color: Colors.black.withOpacity(
-                    0.2,
-                  ),
+                  color: Colors.black.withOpacity(0.2),
                 )
               ],
-              borderRadius: BorderRadius.circular(
-                4,
-              ),
+              borderRadius: BorderRadius.circular(4),
             ),
             child: Image.asset(
               image,

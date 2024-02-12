@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:google_mlkit_translation/google_mlkit_translation.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:login_auth/components/button.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class TraslatePage extends StatefulWidget {
@@ -162,7 +163,7 @@ class _TraslatePageState extends State<TraslatePage> {
                         ),
                       ],
                       decoration: const InputDecoration(
-                        labelText: '궁금해요',
+                        labelText: '아는 말',
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -198,7 +199,7 @@ class _TraslatePageState extends State<TraslatePage> {
                         ),
                       ],
                       decoration: const InputDecoration(
-                        labelText: '알려주세요',
+                        labelText: '알고싶은 말',
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -242,32 +243,43 @@ class _TraslatePageState extends State<TraslatePage> {
               },
             ),
           ),
-          InkWell(
-            onTap: () {
-              captureAndRecognizeText();
-            },
-            child: Container(
-              alignment: Alignment.center,
-              height: 76,
-              color: Colors.grey.shade300,
-              child: const Icon(Icons.camera),
-            ),
+          Column(
+            children: [
+              const SizedBox(
+                height: 12,
+              ),
+              InkWell(
+                onTap: () => captureAndRecognizeText(),
+                child: const Button(
+                  text: "캡쳐하기",
+                  bgColor: Colors.white,
+                  textColor: Color(0xFF292929),
+                  borderColor: Colors.grey,
+                ),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              InkWell(
+                onTap: () {
+                  if (_speechToText.isListening) {
+                    stopListening();
+                  } else {
+                    startListening();
+                  }
+                },
+                child: const Button(
+                  text: "발음 듣기",
+                  bgColor: Color(0xFF292929),
+                  textColor: Colors.white,
+                  borderColor: Color(0xFF292929),
+                ),
+              ),
+            ],
           ),
-          InkWell(
-            onTap: () {
-              if (_speechToText.isListening) {
-                stopListening();
-              } else {
-                startListening();
-              }
-            },
-            child: Container(
-              alignment: Alignment.center,
-              height: 76,
-              color: Colors.blueGrey,
-              child: const Icon(Icons.mic),
-            ),
-          ),
+          const SizedBox(
+            height: 40,
+          )
         ],
       ),
     );
