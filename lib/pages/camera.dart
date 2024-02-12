@@ -1,443 +1,521 @@
-// ignore_for_file: avoid_print, use_build_context_synchronously, unnecessary_null_comparison
-
-import 'dart:io' show File;
+import 'dart:io';
 import 'dart:typed_data';
-// import 'package:http/http.dart' as http;
-import 'package:dio/dio.dart';
+import 'dart:ui';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:flutter_vision/flutter_vision.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:file_picker/file_picker.dart' as file_picker;
-import 'package:logger/logger.dart';
 import 'package:login_auth/components/button.dart';
+
+enum Options { none, imagev8, imagev8seg, frame, vision }
+
+late List<CameraDescription> cameras;
+main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  DartPluginRegistrant.ensureInitialized();
+  runApp(
+    const MaterialApp(
+      home: PickImage(),
+    ),
+  );
+}
 
 class PickImage extends StatefulWidget {
   const PickImage({super.key});
 
   @override
-  State<PickImage> createState() => _CameraPageState();
+  State<PickImage> createState() => _PickImageState();
 }
 
-class _CameraPageState extends State<PickImage> {
-  Uint8List? _image;
-  File? selectedImage;
-  String selectedModel = "yolov5x";
-  List<dynamic> classNames = [];
-  List<dynamic> boundingBox = [];
-  int _currentIndex = 2;
-  int imageHeight = 1;
-  int imageWidth = 1;
+class _PickImageState extends State<PickImage> {
+  late FlutterVision vision;
+  Options option = Options.none;
+  @override
+  void initState() {
+    super.initState();
+    vision = FlutterVision();
+  }
+
+  @override
+  void dispose() async {
+    super.dispose();
+    await vision.closeYoloModel();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SafeArea(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, '/home');
+            },
+          ),
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(36),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                IconButton(
+                  icon: const Column(
                     children: [
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Container(
-                              padding: const EdgeInsets.all(
-                                4,
-                              ),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(
-                                  style: BorderStyle.solid,
-                                  color: Colors.grey.shade300,
-                                ),
-                                borderRadius: BorderRadius.circular(
-                                  20,
-                                ),
-                              ),
-                              child: const Icon(
-                                Icons.arrow_back_rounded,
-                                color: Color(0xFF292929),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Stack(
-                        children: [
-                          _image != null
-                              ? Container(
-                                  width: 320,
-                                  height: 360,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.rectangle,
-                                    color: Colors.grey.shade100,
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: MemoryImage(_image!),
-                                    ),
-                                  ),
-                                )
-                              : Container(
-                                  width: 320,
-                                  height: 360,
-                                  color: Colors.grey.shade200,
-                                ),
-                          for (var box in boundingBox)
-                            Positioned(
-                              left: box[0].toDouble() * imageWidth,
-                              top: box[1].toDouble() * imageHeight,
-                              child: Container(
-                                width: (box[2].toDouble() - box[0].toDouble()) *
-                                    imageWidth,
-                                height:
-                                    (box[3].toDouble() - box[1].toDouble()) *
-                                        imageHeight,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.white,
-                                    width: 2,
-                                  ),
-                                ),
-                              ),
-                            )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Column(
-                        children: [
-                          const SizedBox(
-                            height: 12,
-                          ),
-                          InkWell(
-                            onTap: () => showImagePickerOption(context),
-                            child: const Button(
-                              text: "Import Image",
-                              bgColor: Colors.white,
-                              textColor: Color(0xFF292929),
-                              borderColor: Colors.grey,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          InkWell(
-                            onTap: () => _uploadImage(),
-                            child: const Button(
-                              text: "Submit",
-                              bgColor: Color(0xFF292929),
-                              textColor: Colors.white,
-                              borderColor: Color(0xFF292929),
-                            ),
-                          ),
-                        ],
-                      ),
-                      if (classNames != null && classNames.isNotEmpty)
-                        Column(
-                          children: [
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Container(
-                              width: 320,
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              padding: const EdgeInsets.all(10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    "Result:",
-                                    style: TextStyle(
-                                      color: Color(0xFF292929),
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Text(
-                                    classNames.join('\n'),
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 80,
-                            )
-                          ],
-                        )
-                      else
-                        Container(),
+                      Icon(Icons.center_focus_strong_rounded),
+                      Text("카메라"),
                     ],
                   ),
+                  onPressed: () {
+                    setState(() {
+                      option = Options.frame;
+                    });
+                  },
                 ),
-              ),
-            ),
-          ),
-        ),
-        bottomNavigationBar: SizedBox(
-          height: 90,
-          child: BottomAppBar(
-            color: const Color(0xFF45757B),
-            shadowColor: Colors.grey.shade100,
-            child: Padding(
-              padding: const EdgeInsets.only(
-                top: 8,
-                left: 12,
-                right: 12,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  buildNavItem(Icons.home_outlined, 'Home', 0),
-                  buildNavItem(Icons.explore_outlined, 'Search', 1),
-                  buildNavItem(Icons.camera_rounded, 'Camera', 2),
-                  buildNavItem(Icons.person_outline_rounded, 'My Page', 3),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  void showImagePickerOption(BuildContext context) {
-    showModalBottomSheet(
-      backgroundColor: Colors.white,
-      context: context,
-      builder: (builder) {
-        return Padding(
-          padding: const EdgeInsets.all(20),
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height / 4.5,
-            child: Row(
-              children: [
-                Expanded(
-                  child: InkWell(
-                    onTap: () {
-                      _pickImageFromGallery();
-                    },
-                    child: const SizedBox(
-                      child: Column(
-                        children: [
-                          Icon(
-                            Icons.image,
-                            size: 60,
-                            color: Colors.black,
-                          ),
-                          Text(
-                            "Gallery",
-                          )
-                        ],
-                      ),
-                    ),
+                IconButton(
+                  icon: const Column(
+                    children: [
+                      Icon(Icons.add_a_photo_rounded),
+                      Text("앨범"),
+                    ],
                   ),
+                  onPressed: () {
+                    setState(() {
+                      option = Options.imagev8seg;
+                    });
+                  },
                 ),
-                Expanded(
-                  child: InkWell(
-                    onTap: () {
-                      _pickImageFromCamera();
-                    },
-                    child: const SizedBox(
-                      child: Column(
-                        children: [
-                          Icon(
-                            Icons.camera_alt,
-                            size: 60,
-                            color: Colors.black,
-                          ),
-                          Text(
-                            "Camera",
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                )
               ],
             ),
           ),
-        );
-      },
+        ),
+        body: task(option),
+      ),
     );
   }
 
-  Future _pickImageFromGallery() async {
-    final returnImage =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
+  Widget task(Options option) {
+    if (option == Options.frame) {
+      return YoloVideo(vision: vision);
+    }
+    if (option == Options.imagev8seg) {
+      return YoloImageV8Seg(vision: vision);
+    }
 
-    if (returnImage == null) return;
-    setState(() {
-      selectedImage = File(returnImage.path);
-      _image = File(returnImage.path).readAsBytesSync();
-    });
-
-    final image = File(returnImage.path);
-
-    final decodedImage = await decodeImageFromList(image.readAsBytesSync());
-    final int imageHeight = decodedImage.height;
-    final int imageWidth = decodedImage.width;
-
-    print('Image width: $imageHeight, height: $imageWidth');
-    Navigator.of(context).pop();
-  }
-
-  // Future _pickImageFromWeb() async {
-  //   try {
-  //     final result = await file_picker.FilePicker.platform.pickFiles(
-  //       type: file_picker.FileType.custom,
-  //       allowedExtensions: ['jpg', 'jpeg', 'png'],
-  //     );
-
-  //     if (result == null || result.files.isEmpty) {
-  //       return;
-  //     }
-
-  //     final file = File(result.files.single.path!);
-
-  //     setState(() {
-  //       selectedImage = file;
-  //       _image = file.readAsBytesSync();
-  //     });
-  //   } catch (e) {
-  //     print("Error picking image from web: $e");
-  //   }
-  //   Navigator.of(context).pop();
-  // }
-
-  Future _pickImageFromCamera() async {
-    final returnImage =
-        await ImagePicker().pickImage(source: ImageSource.camera);
-    if (returnImage == null) return;
-    setState(() {
-      selectedImage = File(returnImage.path);
-      _image = File(returnImage.path).readAsBytesSync();
-    });
-    Navigator.of(context).pop();
-  }
-
-  Future<void> _uploadImage() async {
-    if (selectedImage == null) return;
-
-    String uploadUrl = "http://172.30.1.29:8000/image";
-    Dio dio = Dio();
-
-    try {
-      FormData formData = FormData.fromMap({
-        "file": await MultipartFile.fromFile(
-          selectedImage!.path,
-          filename: selectedImage!.path.split('/').last,
+    return const Center(
+      child: Text(
+        "WITT와 함께 할 준비가 되었나요?",
+        style: TextStyle(
+          color: Color(0xFF292929),
+          fontWeight: FontWeight.w400,
+          fontSize: 16,
         ),
-        "model_name": selectedModel,
+      ),
+    );
+  }
+}
+
+class YoloVideo extends StatefulWidget {
+  final FlutterVision vision;
+  const YoloVideo({super.key, required this.vision});
+
+  @override
+  State<YoloVideo> createState() => _YoloVideoState();
+}
+
+class _YoloVideoState extends State<YoloVideo> {
+  late CameraController controller;
+  late List<Map<String, dynamic>> yoloResults;
+  CameraImage? cameraImage;
+  bool isLoaded = false;
+  bool isDetecting = false;
+
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
+
+  init() async {
+    cameras = await availableCameras();
+    controller = CameraController(cameras[0], ResolutionPreset.medium);
+    controller.initialize().then((value) {
+      loadYoloModel().then((value) {
+        setState(() {
+          isLoaded = true;
+          isDetecting = false;
+          yoloResults = [];
+        });
       });
+    });
+  }
 
-      Response uploadResponse = await dio.post(
-        uploadUrl,
-        data: formData,
+  @override
+  void dispose() async {
+    super.dispose();
+    controller.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+    if (!isLoaded) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(
+            color: Color(0xFF7DC7BF),
+          ),
+        ),
       );
-
-      Logger().e(uploadResponse);
-      print("Server Response: ${uploadResponse.data}");
-
-      // if (uploadResponse.statusCode == 200) {
-      //   setState(() {
-      //     // Extract class_name values and store them in classNames list
-      //     classNames = List<dynamic>.from(uploadResponse.data[0]
-      //         .map((item) => item["class_name"].toString()));
-      //     print(classNames);
-      //   });
-      // }
-
-      if (uploadResponse.statusCode == 200) {
-        setState(
-          () {
-            classNames = List<dynamic>.from(
-              Set<String>.from(
-                uploadResponse.data[0]
-                    .map((item) => item["class_name"].toString()),
+    }
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        AspectRatio(
+          aspectRatio: controller.value.aspectRatio,
+          child: CameraPreview(
+            controller,
+          ),
+        ),
+        ...displayBoxesAroundRecognizedObjects(size),
+        Positioned(
+          bottom: 75,
+          width: MediaQuery.of(context).size.width,
+          child: Container(
+            height: 80,
+            width: 80,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              border: Border.all(
+                width: 5,
+                color: Colors.white,
+                style: BorderStyle.solid,
               ),
-            );
+            ),
+            child: isDetecting
+                ? IconButton(
+                    onPressed: () async {
+                      stopDetection();
+                    },
+                    icon: const Icon(
+                      Icons.stop,
+                      color: Colors.red,
+                    ),
+                    iconSize: 50,
+                  )
+                : IconButton(
+                    onPressed: () async {
+                      await startDetection();
+                    },
+                    icon: const Icon(
+                      Icons.play_arrow,
+                      color: Colors.white,
+                    ),
+                    iconSize: 50,
+                  ),
+          ),
+        ),
+      ],
+    );
+  }
 
-            boundingBox = List<dynamic>.from(
-              uploadResponse.data[0].map((item) => item["bbox"]),
-            );
+  Future<void> loadYoloModel() async {
+    await widget.vision.loadYoloModel(
+        labels: 'assets/models/labels.txt',
+        modelPath: 'assets/models/yolov8n.tflite',
+        modelVersion: "yolov8",
+        numThreads: 2,
+        useGpu: true);
+    setState(() {
+      isLoaded = true;
+    });
+  }
 
-            print(boundingBox);
-          },
-        );
-      }
-    } catch (e) {
-      Logger().e(e);
-      print("Error uploading image: $e");
+  Future<void> yoloOnFrame(CameraImage cameraImage) async {
+    final result = await widget.vision.yoloOnFrame(
+        bytesList: cameraImage.planes.map((plane) => plane.bytes).toList(),
+        imageHeight: cameraImage.height,
+        imageWidth: cameraImage.width,
+        iouThreshold: 0.4,
+        confThreshold: 0.4,
+        classThreshold: 0.5);
+    if (result.isNotEmpty) {
+      setState(() {
+        yoloResults = result;
+      });
     }
   }
 
-  Widget buildNavItem(IconData icon, String label, int index) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _currentIndex = index;
-        });
-        switch (_currentIndex) {
-          case 0:
-            Navigator.pushNamed(context, '/home');
-            break;
-          case 1:
-            Navigator.pushNamed(context, '/search');
-            break;
-          case 2:
-            Navigator.pushNamed(context, '/camera');
-            break;
-          case 3:
-            Navigator.pushNamed(context, '/mypage');
-            break;
-        }
-      },
-      child: Column(
-        children: [
-          Icon(
-            icon,
-            color:
-                _currentIndex == index ? Colors.white : const Color(0xFF292929),
-            size: 28,
+  Future<void> startDetection() async {
+    setState(() {
+      isDetecting = true;
+    });
+    if (controller.value.isStreamingImages) {
+      return;
+    }
+    await controller.startImageStream((image) async {
+      if (isDetecting) {
+        cameraImage = image;
+        yoloOnFrame(image);
+      }
+    });
+  }
+
+  Future<void> stopDetection() async {
+    setState(() {
+      isDetecting = false;
+      yoloResults.clear();
+    });
+  }
+
+  List<Widget> displayBoxesAroundRecognizedObjects(Size screen) {
+    if (yoloResults.isEmpty) return [];
+    double factorX = screen.width / (cameraImage?.height ?? 1);
+    double factorY = screen.height / (cameraImage?.width ?? 1);
+
+    Color colorPick = Colors.black;
+
+    return yoloResults.map((result) {
+      return Positioned(
+        left: result["box"][0] * factorX,
+        top: result["box"][1] * factorY,
+        width: (result["box"][2] - result["box"][0]) * factorX,
+        height: (result["box"][3] - result["box"][1]) * factorY,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+            border: Border.all(color: Colors.yellow, width: 4.0),
           ),
-          const SizedBox(
-            height: 4,
-          ),
-          Text(
-            label,
+          child: Text(
+            "${result['tag']} ${(result['box'][4] * 100).toStringAsFixed(0)}%",
             style: TextStyle(
-              color: _currentIndex == index
-                  ? Colors.white
-                  : const Color(0xFF292929),
-              fontWeight: FontWeight.w400,
-              fontSize: 12,
+              background: Paint()..color = colorPick,
+              color: Colors.white,
+              fontSize: 18.0,
+            ),
+          ),
+        ),
+      );
+    }).toList();
+  }
+}
+
+class YoloImageV8Seg extends StatefulWidget {
+  final FlutterVision vision;
+  const YoloImageV8Seg({super.key, required this.vision});
+
+  @override
+  State<YoloImageV8Seg> createState() => _YoloImageV8SegState();
+}
+
+class _YoloImageV8SegState extends State<YoloImageV8Seg> {
+  late List<Map<String, dynamic>> yoloResults;
+  File? imageFile;
+  int imageHeight = 1;
+  int imageWidth = 1;
+  bool isLoaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    loadYoloModel().then((value) {
+      setState(() {
+        yoloResults = [];
+        isLoaded = true;
+      });
+    });
+  }
+
+  @override
+  void dispose() async {
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+    if (!isLoaded) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(
+            color: Color(0xFF7DC7BF),
+          ),
+        ),
+      );
+    }
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        imageFile != null ? Image.file(imageFile!) : const SizedBox(),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              InkWell(
+                onTap: pickImage,
+                child: const Button(
+                  text: "이미지 고르기",
+                  bgColor: Colors.white,
+                  textColor: Color(0xFF292929),
+                  borderColor: Colors.grey,
+                ),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              InkWell(
+                onTap: yoloOnImage,
+                child: const Button(
+                  text: "보내기",
+                  bgColor: Color(0xFF292929),
+                  textColor: Colors.white,
+                  borderColor: Color(0xFF292929),
+                ),
+              ),
+              const SizedBox(
+                height: 32,
+              )
+            ],
+          ),
+        ),
+        ...displayBoxesAroundRecognizedObjects(size),
+      ],
+    );
+  }
+
+  Future<void> loadYoloModel() async {
+    await widget.vision.loadYoloModel(
+        labels: 'assets/models/labels.txt',
+        modelPath: 'assets/models/yolov8n-seg.tflite',
+        modelVersion: "yolov8seg",
+        quantization: false,
+        numThreads: 2,
+        useGpu: true);
+    setState(() {
+      isLoaded = true;
+    });
+  }
+
+  Future<void> pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    // Capture a photo
+    final XFile? photo = await picker.pickImage(source: ImageSource.gallery);
+    if (photo != null) {
+      setState(() {
+        imageFile = File(photo.path);
+      });
+    }
+  }
+
+  yoloOnImage() async {
+    yoloResults.clear();
+    Uint8List byte = await imageFile!.readAsBytes();
+    final image = await decodeImageFromList(byte);
+    imageHeight = image.height;
+    imageWidth = image.width;
+    final result = await widget.vision.yoloOnImage(
+        bytesList: byte,
+        imageHeight: image.height,
+        imageWidth: image.width,
+        iouThreshold: 0.8,
+        confThreshold: 0.4,
+        classThreshold: 0.5);
+    if (result.isNotEmpty) {
+      setState(() {
+        yoloResults = result;
+      });
+    }
+  }
+
+  List<Widget> displayBoxesAroundRecognizedObjects(Size screen) {
+    if (yoloResults.isEmpty) return [];
+
+    double factorX = screen.width / (imageWidth);
+    double imgRatio = imageWidth / imageHeight;
+    double newWidth = imageWidth * factorX;
+    double newHeight = newWidth / imgRatio;
+    double factorY = newHeight / (imageHeight);
+
+    double pady = (screen.height - newHeight) / 3;
+
+    Color colorPick = Colors.black;
+    return yoloResults.map((result) {
+      return Stack(
+        children: [
+          Positioned(
+            left: result["box"][0] * factorX,
+            top: result["box"][1] * factorY + pady,
+            width: (result["box"][2] - result["box"][0]) * factorX,
+            height: (result["box"][3] - result["box"][1]) * factorY,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(10),
+                ),
+                border: Border.all(color: Colors.yellow),
+              ),
+              child: Text(
+                "${result['tag']} ${(result['box'][4] * 100).toStringAsFixed(0)}%",
+                style: TextStyle(
+                  background: Paint()..color = colorPick,
+                  color: Colors.white,
+                  fontSize: 18.0,
+                ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: result["box"][0] * factorX,
+            top: result["box"][1] * factorY + pady,
+            width: (result["box"][2] - result["box"][0]) * factorX,
+            height: (result["box"][3] - result["box"][1]) * factorY,
+            child: CustomPaint(
+              painter: PolygonPainter(
+                  points: (result["polygons"] as List<dynamic>).map((e) {
+                Map<String, double> xy = Map<String, double>.from(e);
+                xy['x'] = (xy['x'] as double) * factorX;
+                xy['y'] = (xy['y'] as double) * factorY;
+                return xy;
+              }).toList()),
             ),
           ),
         ],
-      ),
-    );
+      );
+    }).toList();
+  }
+}
+
+class PolygonPainter extends CustomPainter {
+  final List<Map<String, double>> points;
+
+  PolygonPainter({required this.points});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = const Color.fromARGB(129, 255, 2, 124)
+      ..strokeWidth = 2
+      ..style = PaintingStyle.fill;
+
+    final path = Path();
+    if (points.isNotEmpty) {
+      path.moveTo(points[0]['x']!, points[0]['y']!);
+      for (var i = 1; i < points.length; i++) {
+        path.lineTo(points[i]['x']!, points[i]['y']!);
+      }
+      path.close();
+    }
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }

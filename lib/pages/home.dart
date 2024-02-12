@@ -25,27 +25,6 @@ class HomeState extends State<Home> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          actions: [
-            IconButton(
-              icon: const Icon(
-                Icons.nightlight,
-              ),
-              onPressed: () {},
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: IconButton(
-                onPressed: logOut,
-                icon: const Icon(
-                  Icons.logout_rounded,
-                ),
-              ),
-            )
-          ],
-        ),
         backgroundColor: Colors.white,
         body: SafeArea(
           child: SingleChildScrollView(
@@ -68,7 +47,7 @@ class HomeState extends State<Home> {
                         textAlign: TextAlign.left,
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 32,
                       ),
                     ],
                   ),
@@ -79,7 +58,7 @@ class HomeState extends State<Home> {
                   ),
                 ),
                 const SizedBox(
-                  height: 40,
+                  height: 64,
                 ),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 32),
@@ -103,7 +82,7 @@ class HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Sample(image: AssetsManager.busPicture),
-                    Sample(image: AssetsManager.busPicture)
+                    Sample(image: AssetsManager.segSam)
                   ],
                 ),
                 const SizedBox(
@@ -114,7 +93,7 @@ class HomeState extends State<Home> {
                   child: Column(
                     children: [
                       Text(
-                        "더 알아보기",
+                        "More WITT",
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
@@ -127,20 +106,40 @@ class HomeState extends State<Home> {
                     ],
                   ),
                 ),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                Column(
                   children: [
-                    InfoCard(
-                      text: "info",
-                      bgColor: Colors.white,
-                      textColor: Color(0xFF292929),
-                      borderColor: Colors.grey,
-                    ),
-                    InfoCard(
-                      text: "info",
-                      bgColor: Colors.white,
-                      textColor: Color(0xFF292929),
-                      borderColor: Colors.grey,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              '/translate',
+                            );
+                          },
+                          child: const InfoCard(
+                            text: "WITT 번역기",
+                            bgColor: Colors.white,
+                            textColor: Color(0xFF292929),
+                            borderColor: Colors.grey,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              '/detect',
+                            );
+                          },
+                          child: const InfoCard(
+                            text: "사진 속에 \n무엇이 있을까?",
+                            bgColor: Colors.white,
+                            textColor: Color(0xFF292929),
+                            borderColor: Colors.grey,
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

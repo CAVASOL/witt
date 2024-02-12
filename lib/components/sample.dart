@@ -29,7 +29,7 @@ class Sample extends StatelessWidget {
                 )
               ],
               borderRadius: BorderRadius.circular(
-                8,
+                4,
               ),
             ),
             child: Image.asset(

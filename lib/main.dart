@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:login_auth/pages/camera.dart';
+import 'package:login_auth/pages/image_detect.dart';
 import 'package:login_auth/pages/auth.dart';
 import 'package:login_auth/pages/home.dart';
 import 'package:login_auth/pages/mypage.dart';
 import 'package:login_auth/pages/register.dart';
+import 'package:login_auth/pages/translate.dart';
 import 'package:login_auth/pages/welcome.dart';
 import 'package:login_auth/pages/search.dart';
 import 'firebase_options.dart';
@@ -40,6 +42,8 @@ class MyApp extends StatelessWidget {
         '/search': (context) => const Search(),
         '/camera': (context) => const PickImage(),
         '/mypage': (context) => const MyPage(),
+        '/detect': (context) => const ImageDetect(),
+        '/translate': (context) => const TraslatePage(title: ''),
       },
     );
   }
