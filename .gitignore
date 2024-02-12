@@ -45,6 +45,7 @@ app.*.map.json
 firebase_options.dart
 *.json
 myenv
-
+.env
+consts.dart
 
 .venv

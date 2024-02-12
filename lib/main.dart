@@ -8,7 +8,7 @@ import 'package:login_auth/pages/mypage.dart';
 import 'package:login_auth/pages/register.dart';
 import 'package:login_auth/pages/translate.dart';
 import 'package:login_auth/pages/welcome.dart';
-import 'package:login_auth/pages/search.dart';
+import 'package:login_auth/pages/chat.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const Auth(),
         '/register': (context) => RegisterPage(onTap: onTap),
         '/home': (context) => const Home(),
-        '/search': (context) => const Search(),
+        '/search': (context) => const ChatPage(),
         '/camera': (context) => const PickImage(),
         '/mypage': (context) => const MyPage(),
         '/detect': (context) => const ImageDetect(),

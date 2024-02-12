@@ -167,7 +167,7 @@ class _YoloVideoState extends State<YoloVideo> {
       return const Scaffold(
         body: Center(
           child: CircularProgressIndicator(
-            color: Color(0xFF7DC7BF),
+            color: Color(0xFF45757B),
           ),
         ),
       );
@@ -191,7 +191,7 @@ class _YoloVideoState extends State<YoloVideo> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                width: 5,
+                width: 4,
                 color: Colors.white,
                 style: BorderStyle.solid,
               ),
@@ -205,7 +205,7 @@ class _YoloVideoState extends State<YoloVideo> {
                       Icons.stop,
                       color: Colors.red,
                     ),
-                    iconSize: 50,
+                    iconSize: 40,
                   )
                 : IconButton(
                     onPressed: () async {
@@ -215,7 +215,7 @@ class _YoloVideoState extends State<YoloVideo> {
                       Icons.play_arrow,
                       color: Colors.white,
                     ),
-                    iconSize: 50,
+                    iconSize: 40,
                   ),
           ),
         ),
@@ -342,7 +342,7 @@ class _YoloImageV8SegState extends State<YoloImageV8Seg> {
       return const Scaffold(
         body: Center(
           child: CircularProgressIndicator(
-            color: Color(0xFF7DC7BF),
+            color: Color(0xFF45757B),
           ),
         ),
       );
@@ -359,7 +359,7 @@ class _YoloImageV8SegState extends State<YoloImageV8Seg> {
               InkWell(
                 onTap: pickImage,
                 child: const Button(
-                  text: "이미지 고르기",
+                  text: "사진 가져오기",
                   bgColor: Colors.white,
                   textColor: Color(0xFF292929),
                   borderColor: Colors.grey,

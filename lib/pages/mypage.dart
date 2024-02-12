@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:login_auth/components/button.dart';
+// import 'package:login_auth/services/assets_manager.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({super.key});
@@ -10,6 +12,7 @@ class MyPage extends StatefulWidget {
 
 class _MyPageState extends State<MyPage> {
   final user = FirebaseAuth.instance.currentUser!;
+
   int _currentIndex = 3;
 
   void logOut() {
@@ -27,19 +30,34 @@ class _MyPageState extends State<MyPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(
-                height: 200,
+                height: 240,
               ),
+              // Center(
+              //   child: Image.asset(
+              //     AssetsManager.bye,
+              //     width: 200,
+              //     height: 200,
+              //   ),
+              // ),
               const Text(
-                "Heyyyyyyyyyyyy",
+                "감사합니다 \n곧 다시 만나요!",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w400,
+                ),
+                textAlign: TextAlign.center,
               ),
               const SizedBox(
                 height: 16,
               ),
               Center(
-                child: IconButton(
-                  onPressed: logOut,
-                  icon: const Icon(
-                    Icons.logout_rounded,
+                child: GestureDetector(
+                  onTap: logOut,
+                  child: const Button(
+                    text: "WITT 나가기",
+                    bgColor: Color(0xFF292929),
+                    textColor: Colors.white,
+                    borderColor: Color(0xFF292929),
                   ),
                 ),
               ),
@@ -63,7 +81,7 @@ class _MyPageState extends State<MyPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 buildNavItem(Icons.home_outlined, 'Home', 0),
-                buildNavItem(Icons.explore_outlined, 'Search', 1),
+                buildNavItem(Icons.question_answer_rounded, 'Chat', 1),
                 buildNavItem(Icons.camera_rounded, 'Camera', 2),
                 buildNavItem(Icons.person_outline_rounded, 'My Page', 3),
               ],

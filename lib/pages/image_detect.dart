@@ -110,7 +110,7 @@ class _ImageDetectPageState extends State<ImageDetect> {
                           InkWell(
                             onTap: () => showImagePickerOption(context),
                             child: const Button(
-                              text: "Import Image",
+                              text: "사진 가져오기",
                               bgColor: Colors.white,
                               textColor: Color(0xFF292929),
                               borderColor: Colors.grey,
@@ -122,7 +122,7 @@ class _ImageDetectPageState extends State<ImageDetect> {
                           InkWell(
                             onTap: () => _uploadImage(),
                             child: const Button(
-                              text: "Submit",
+                              text: "보내기",
                               bgColor: Color(0xFF292929),
                               textColor: Colors.white,
                               borderColor: Color(0xFF292929),
@@ -147,7 +147,7 @@ class _ImageDetectPageState extends State<ImageDetect> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Text(
-                                    "Result:",
+                                    "결과는?",
                                     style: TextStyle(
                                       color: Color(0xFF292929),
                                       fontSize: 18,
@@ -194,7 +194,7 @@ class _ImageDetectPageState extends State<ImageDetect> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   buildNavItem(Icons.home_outlined, 'Home', 0),
-                  buildNavItem(Icons.explore_outlined, 'Search', 1),
+                  buildNavItem(Icons.question_answer_rounded, 'Chat', 1),
                   buildNavItem(Icons.camera_rounded, 'Camera', 2),
                   buildNavItem(Icons.person_outline_rounded, 'My Page', 3),
                 ],

@@ -11,4 +11,5 @@ class AssetsManager {
   static String wittLogo = "$imagePath/sam18.png";
   static String twitterLogo = "$imagePath/twitter.png";
   static String segSam = "$imagePath/segsam.png";
+  static String bye = "$imagePath/sam5.png";
 }

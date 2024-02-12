@@ -251,7 +251,7 @@ class HomeState extends State<Home> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   buildNavItem(Icons.home_outlined, 'Home', 0),
-                  buildNavItem(Icons.explore_outlined, 'Search', 1),
+                  buildNavItem(Icons.question_answer_rounded, 'Chat', 1),
                   buildNavItem(Icons.camera_rounded, 'Camera', 2),
                   buildNavItem(Icons.person_outline_rounded, 'My Page', 3),
                 ],
