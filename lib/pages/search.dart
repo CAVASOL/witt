@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 // import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:login_auth/services/assets_manager.dart';
 
@@ -11,7 +12,7 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   int _currentIndex = 1;
-  // final bool _isTyping = true;
+  final bool _isTyping = true;
 
   late TextEditingController textEditingController;
 
@@ -37,18 +38,25 @@ class _SearchState extends State<Search> {
           elevation: 2,
           leading: Padding(
             padding: const EdgeInsets.all(12),
-            child: Image.asset(AssetsManager.chatGPT),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(4),
+              child: Image.asset(AssetsManager.wittLogo),
+            ),
           ),
           title: const Text(
-            "ChatGPT",
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+            "WITT",
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w400,
+            ),
           ),
         ),
-        body: const SafeArea(
+        body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
               children: [
-                // Flexible(
+                // Expanded(
                 //   child: ListView.builder(
                 //     itemCount: 6,
                 //     itemBuilder: (context, index) {
@@ -56,13 +64,23 @@ class _SearchState extends State<Search> {
                 //     },
                 //   ),
                 // ),
-                Text("heyo"),
-                // if (_isTyping) ...[
-                //   const SpinKitThreeBounce(
-                //     color: Colors.white,
-                //     size: 16,
-                //   )
-                // ]
+                if (_isTyping) ...[
+                  const SpinKitThreeBounce(
+                    color: Color(0xFF7DC7BF),
+                    size: 16,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: TextField(
+                        controller: textEditingController,
+                        onSubmitted: (value) {},
+                        decoration: const InputDecoration.collapsed(
+                            hintText: "How can I help you?"),
+                      ))
+                    ],
+                  )
+                ]
               ],
             ),
           ),
