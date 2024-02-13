@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:login_auth/components/button.dart';
+import 'package:login_auth/services/assets_manager.dart';
 // import 'package:login_auth/services/assets_manager.dart';
 
 class MyPage extends StatefulWidget {
@@ -30,15 +31,15 @@ class _MyPageState extends State<MyPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(
-                height: 240,
+                height: 180,
               ),
-              // Center(
-              //   child: Image.asset(
-              //     AssetsManager.bye,
-              //     width: 200,
-              //     height: 200,
-              //   ),
-              // ),
+              Center(
+                child: Image.asset(
+                  AssetsManager.bye,
+                  width: 200,
+                  height: 200,
+                ),
+              ),
               const Text(
                 "감사합니다 \n곧 다시 만나요!",
                 style: TextStyle(
