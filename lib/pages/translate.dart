@@ -113,7 +113,9 @@ class _TraslatePageState extends State<TraslatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,
@@ -124,7 +126,6 @@ class _TraslatePageState extends State<TraslatePage> {
           },
         ),
       ),
-      backgroundColor: Colors.white,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

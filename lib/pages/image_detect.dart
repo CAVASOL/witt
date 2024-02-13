@@ -23,7 +23,6 @@ class _ImageDetectPageState extends State<ImageDetect> {
   String selectedModel = "yolov5x";
   List<dynamic> classNames = [];
   List<dynamic> boundingBox = [];
-  final int _currentIndex = 2;
   int imageHeight = 1;
   int imageWidth = 1;
 
@@ -33,6 +32,7 @@ class _ImageDetectPageState extends State<ImageDetect> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.white,
           leading: IconButton(
             icon: const Icon(
               Icons.arrow_back,
@@ -302,7 +302,7 @@ class _ImageDetectPageState extends State<ImageDetect> {
   Future<void> _uploadImage() async {
     if (selectedImage == null) return;
 
-    String uploadUrl = "http://172.30.1.29:8000/image";
+    String uploadUrl = "http://172.30.1.44:8000/image";
     Dio dio = Dio();
 
     try {
