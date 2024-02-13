@@ -23,7 +23,7 @@ class _ImageDetectPageState extends State<ImageDetect> {
   String selectedModel = "yolov5x";
   List<dynamic> classNames = [];
   List<dynamic> boundingBox = [];
-  int _currentIndex = 2;
+  final int _currentIndex = 2;
   int imageHeight = 1;
   int imageWidth = 1;
 
@@ -175,29 +175,6 @@ class _ImageDetectPageState extends State<ImageDetect> {
                     ],
                   ),
                 ),
-              ),
-            ),
-          ),
-        ),
-        bottomNavigationBar: SizedBox(
-          height: 90,
-          child: BottomAppBar(
-            color: const Color(0xFF45757B),
-            shadowColor: Colors.grey.shade100,
-            child: Padding(
-              padding: const EdgeInsets.only(
-                top: 8,
-                left: 12,
-                right: 12,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  buildNavItem(Icons.home_outlined, 'Home', 0),
-                  buildNavItem(Icons.question_answer_rounded, 'Chat', 1),
-                  buildNavItem(Icons.camera_rounded, 'Camera', 2),
-                  buildNavItem(Icons.person_outline_rounded, 'My Page', 3),
-                ],
               ),
             ),
           ),
@@ -376,52 +353,5 @@ class _ImageDetectPageState extends State<ImageDetect> {
       Logger().e(e);
       print("Error uploading image: $e");
     }
-  }
-
-  Widget buildNavItem(IconData icon, String label, int index) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _currentIndex = index;
-        });
-        switch (_currentIndex) {
-          case 0:
-            Navigator.pushNamed(context, '/home');
-            break;
-          case 1:
-            Navigator.pushNamed(context, '/search');
-            break;
-          case 2:
-            Navigator.pushNamed(context, '/camera');
-            break;
-          case 3:
-            Navigator.pushNamed(context, '/mypage');
-            break;
-        }
-      },
-      child: Column(
-        children: [
-          Icon(
-            icon,
-            color:
-                _currentIndex == index ? Colors.white : const Color(0xFF292929),
-            size: 28,
-          ),
-          const SizedBox(
-            height: 4,
-          ),
-          Text(
-            label,
-            style: TextStyle(
-              color: _currentIndex == index
-                  ? Colors.white
-                  : const Color(0xFF292929),
-              fontWeight: FontWeight.w400,
-              fontSize: 12,
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }

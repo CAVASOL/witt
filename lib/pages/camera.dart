@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:flutter_vision/flutter_vision.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:login_auth/components/button.dart';
+import 'package:login_auth/services/assets_manager.dart';
 
 enum Options { none, imagev8, imagev8seg, frame, vision }
 
@@ -48,7 +49,9 @@ class _PickImageState extends State<PickImage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
+          backgroundColor: Colors.white,
           leading: IconButton(
             icon: const Icon(
               Icons.arrow_back,
@@ -106,15 +109,30 @@ class _PickImageState extends State<PickImage> {
       return YoloImageV8Seg(vision: vision);
     }
 
-    return const Center(
-      child: Text(
-        "WITT와 함께 할 준비가 되었나요?",
-        style: TextStyle(
-          color: Color(0xFF292929),
-          fontWeight: FontWeight.w400,
-          fontSize: 16,
+    return Column(
+      children: [
+        const SizedBox(
+          height: 100,
         ),
-      ),
+        Center(
+          child: Image.asset(
+            AssetsManager.bye,
+            width: 200,
+            height: 200,
+          ),
+        ),
+        const Center(
+          child: Text(
+            "Are you ready to be WITT?",
+            style: TextStyle(
+              color: Color(0xFF292929),
+              fontWeight: FontWeight.w600,
+              fontSize: 20,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ],
     );
   }
 }

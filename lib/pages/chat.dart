@@ -1,6 +1,7 @@
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:login_auth/consts.dart';
 
 class ChatPage extends StatefulWidget {
@@ -14,6 +15,7 @@ class _ChatPageState extends State<ChatPage> {
   late ChatUser _curUser;
   late ChatUser _gptUser;
   final List<ChatMessage> _messages = [];
+  int _selectedIndex = 1;
 
   @override
   void initState() {
@@ -54,6 +56,60 @@ class _ChatPageState extends State<ChatPage> {
             getChatResponse(m);
           },
           messages: _messages,
+        ),
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            color: const Color(0xFF45757B),
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 20,
+                color: Colors.black.withOpacity(.1),
+              )
+            ],
+          ),
+          child: SafeArea(
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+              child: GNav(
+                rippleColor: Colors.grey[300]!,
+                hoverColor: Colors.grey[100]!,
+                gap: 8,
+                activeColor: Colors.black,
+                iconSize: 24,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                duration: const Duration(milliseconds: 400),
+                tabBackgroundColor: Colors.white,
+                color: Colors.black,
+                tabs: const [
+                  GButton(
+                    icon: Icons.home_rounded,
+                    text: 'Home',
+                  ),
+                  GButton(
+                    icon: Icons.question_answer_rounded,
+                    text: 'Chat',
+                  ),
+                  GButton(
+                    icon: Icons.camera_rounded,
+                    text: 'Camera',
+                  ),
+                  GButton(
+                    icon: Icons.person_outline_rounded,
+                    text: 'My Page',
+                  ),
+                ],
+                selectedIndex: _selectedIndex,
+                onTabChange: (index) {
+                  setState(() {
+                    _selectedIndex = index;
+                  });
+                  navigateTo(index);
+                },
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -101,6 +157,23 @@ class _ChatPageState extends State<ChatPage> {
           },
         );
       }
+    }
+  }
+
+  void navigateTo(int index) {
+    switch (index) {
+      case 0:
+        Navigator.pushNamed(context, '/home');
+        break;
+      case 1:
+        Navigator.pushNamed(context, '/search');
+        break;
+      case 2:
+        Navigator.pushNamed(context, '/camera');
+        break;
+      case 3:
+        Navigator.pushNamed(context, '/mypage');
+        break;
     }
   }
 }
