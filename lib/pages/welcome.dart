@@ -30,7 +30,7 @@ class Welcome extends StatelessWidget {
                 );
               },
               child: const Button(
-                text: "Login",
+                text: "들어가기",
                 bgColor: Color(0xFF292929),
                 textColor: Colors.white,
                 borderColor: Color(0xFF292929),
@@ -60,19 +60,20 @@ class Welcome extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Countinue as',
+                  '손님으로',
                   style: TextStyle(
                     color: Color(0xFF292929),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
                   ),
                 ),
                 SizedBox(
                   width: 4,
                 ),
                 Text(
-                  'a Guest',
+                  '입장하기',
                   style: TextStyle(
                     color: Color(0xFF292929),
-                    fontWeight: FontWeight.bold,
                     fontSize: 14,
                   ),
                 ),

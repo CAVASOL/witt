@@ -220,8 +220,8 @@ class _YoloVideoState extends State<YoloVideo> {
                       stopDetection();
                     },
                     icon: const Icon(
-                      Icons.stop,
-                      color: Colors.red,
+                      Icons.center_focus_strong_rounded,
+                      color: Color(0xFF7DC7BF),
                     ),
                     iconSize: 40,
                   )
