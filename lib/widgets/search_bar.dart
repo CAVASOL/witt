@@ -37,9 +37,9 @@ class KeySearchBar extends StatelessWidget {
                         maxLines: 1,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: '키워드를 검색해 주세요.',
+                          hintText: '',
                           hintStyle: TextStyle(
-                            color: Color(0xFF292929),
+                            color: Colors.grey,
                             fontWeight: FontWeight.w400,
                           ),
                         ),

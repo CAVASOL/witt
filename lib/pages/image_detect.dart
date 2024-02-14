@@ -35,7 +35,7 @@ class _ImageDetectPageState extends State<ImageDetect> {
           backgroundColor: Colors.white,
           leading: IconButton(
             icon: const Icon(
-              Icons.arrow_back,
+              Icons.clear_rounded,
               color: Colors.black,
             ),
             onPressed: () {
@@ -302,7 +302,7 @@ class _ImageDetectPageState extends State<ImageDetect> {
   Future<void> _uploadImage() async {
     if (selectedImage == null) return;
 
-    String uploadUrl = "http://172.30.1.44:8000/image";
+    String uploadUrl = "http://172.30.1.92:8000/image";
     Dio dio = Dio();
 
     try {
