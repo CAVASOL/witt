@@ -43,6 +43,7 @@ class _TraslatePageState extends State<TraslatePage> {
     _translationController.close();
     _onDeviceTranslator.close();
     _textRecognizer.close();
+
     super.dispose();
   }
 
@@ -118,7 +119,7 @@ class _TraslatePageState extends State<TraslatePage> {
         backgroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(
-            Icons.arrow_back,
+            Icons.clear_rounded,
             color: Colors.black,
           ),
           onPressed: () {
@@ -139,6 +140,10 @@ class _TraslatePageState extends State<TraslatePage> {
                     padding: const EdgeInsets.only(right: 12),
                     child: DropdownButtonFormField<TranslateLanguage>(
                       value: _sourceLanguage,
+                      dropdownColor: Colors.white,
+                      style: const TextStyle(
+                        color: Color(0xFF292929),
+                      ),
                       onChanged: (value) {
                         setState(() {
                           _sourceLanguage = value!;
@@ -175,6 +180,10 @@ class _TraslatePageState extends State<TraslatePage> {
                     padding: const EdgeInsets.only(left: 12),
                     child: DropdownButtonFormField<TranslateLanguage>(
                       value: _targetLanguage,
+                      dropdownColor: Colors.white,
+                      style: const TextStyle(
+                        color: Color(0xFF292929),
+                      ),
                       onChanged: (value) {
                         setState(() {
                           _targetLanguage = value!;
@@ -209,13 +218,17 @@ class _TraslatePageState extends State<TraslatePage> {
               ],
             ),
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 4),
           Padding(
             padding: const EdgeInsets.all(20),
             child: TextField(
               controller: _controller,
               decoration: const InputDecoration(
-                hintText: '단어를 작성해 주세요',
+                hintText: '번역할 내용을 작성해 주세요',
+                hintStyle: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 14,
+                ),
                 border: OutlineInputBorder(),
               ),
               onSubmitted: (text) async {
@@ -270,7 +283,7 @@ class _TraslatePageState extends State<TraslatePage> {
                   }
                 },
                 child: const Button(
-                  text: "발음 듣기",
+                  text: "물어보기",
                   bgColor: Color(0xFF292929),
                   textColor: Colors.white,
                   borderColor: Color(0xFF292929),
