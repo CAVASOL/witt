@@ -304,7 +304,11 @@ class HomeState extends State<Home> {
         Navigator.pushNamed(context, '/search');
         break;
       case 2:
-        Navigator.pushNamed(context, '/camera');
+        Navigator.pushNamed(context, '/camera').then((value) => {
+              setState(() {
+                _selectedIndex = value as int;
+              })
+            });
         break;
       case 3:
         Navigator.pushNamed(context, '/mypage');

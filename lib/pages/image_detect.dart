@@ -39,7 +39,7 @@ class _ImageDetectPageState extends State<ImageDetect> {
               color: Colors.black,
             ),
             onPressed: () {
-              Navigator.pushNamed(context, '/home');
+              Navigator.of(context).pop(0);
             },
           ),
         ),

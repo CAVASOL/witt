@@ -58,7 +58,7 @@ class _PickImageState extends State<PickImage> {
               color: Colors.black,
             ),
             onPressed: () {
-              Navigator.pushNamed(context, '/home');
+              Navigator.of(context).pop(0);
             },
           ),
           bottom: PreferredSize(
@@ -173,7 +173,7 @@ class _YoloVideoState extends State<YoloVideo> {
   }
 
   @override
-  void dispose() async {
+  void dispose() {
     super.dispose();
     controller.dispose();
   }
