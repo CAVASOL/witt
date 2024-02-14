@@ -37,7 +37,7 @@ class KeySearchBar extends StatelessWidget {
                         maxLines: 1,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: '',
+                          hintText: 'Welcome to WITT',
                           hintStyle: TextStyle(
                             color: Colors.grey,
                             fontWeight: FontWeight.w400,

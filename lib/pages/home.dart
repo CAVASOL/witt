@@ -33,21 +33,13 @@ class HomeState extends State<Home> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 80,
+                  height: 56,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 32),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 32),
                   child: Column(
                     children: [
-                      Text(
-                        "안녕하세요? \n${user.email}",
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
-                      const SizedBox(
+                      SizedBox(
                         height: 32,
                       ),
                     ],
@@ -196,21 +188,21 @@ class HomeState extends State<Home> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(4),
+                      padding: const EdgeInsets.all(12),
                       child: Image.asset(
                         AssetsManager.instaLogo,
                         width: 32,
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(4),
+                      padding: const EdgeInsets.all(12),
                       child: Image.asset(
                         AssetsManager.pinterestLogo,
                         width: 32,
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(4),
+                      padding: const EdgeInsets.all(12),
                       child: Image.asset(
                         AssetsManager.twitterLogo,
                         width: 32,
@@ -238,6 +230,7 @@ class HomeState extends State<Home> {
           ),
         ),
         bottomNavigationBar: Container(
+          height: 80,
           decoration: BoxDecoration(
             color: const Color(0xFF45757B),
             boxShadow: [

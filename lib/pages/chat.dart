@@ -38,26 +38,30 @@ class _ChatPageState extends State<ChatPage> {
               color: Colors.black,
             ),
             onPressed: () {
-              Navigator.pushNamed(context, '/home');
+              Navigator.of(context).pop();
             },
           ),
         ),
-        body: DashChat(
-          currentUser: _curUser,
-          messageOptions: const MessageOptions(
-            currentUserContainerColor: Color(0xFF7DC7BF),
-            currentUserTextColor: Color(0xFF292929),
-            textColor: Color(0xFF292929),
-            timeTextColor: Color(0xFF292929),
-            currentUserTimeTextColor: Color(0xFF292929),
-            containerColor: Colors.blueGrey,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: DashChat(
+            currentUser: _curUser,
+            messageOptions: const MessageOptions(
+              currentUserContainerColor: Color(0xFF7DC7BF),
+              currentUserTextColor: Color(0xFF292929),
+              textColor: Color(0xFF292929),
+              timeTextColor: Color(0xFF292929),
+              currentUserTimeTextColor: Color(0xFF292929),
+              containerColor: Colors.blueGrey,
+            ),
+            onSend: (ChatMessage m) {
+              getChatResponse(m);
+            },
+            messages: _messages,
           ),
-          onSend: (ChatMessage m) {
-            getChatResponse(m);
-          },
-          messages: _messages,
         ),
         bottomNavigationBar: Container(
+          height: 80,
           decoration: BoxDecoration(
             color: const Color(0xFF45757B),
             boxShadow: [
@@ -169,7 +173,11 @@ class _ChatPageState extends State<ChatPage> {
         Navigator.pushNamed(context, '/search');
         break;
       case 2:
-        Navigator.pushNamed(context, '/camera');
+        Navigator.pushNamed(context, '/camera').then((value) => {
+              setState(() {
+                _selectedIndex = value as int;
+              })
+            });
         break;
       case 3:
         Navigator.pushNamed(context, '/mypage');

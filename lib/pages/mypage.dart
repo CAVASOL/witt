@@ -68,6 +68,7 @@ class _MyPageState extends State<MyPage> {
         ),
       ),
       bottomNavigationBar: Container(
+        height: 80,
         decoration: BoxDecoration(
           color: const Color(0xFF45757B),
           boxShadow: [
@@ -131,7 +132,11 @@ class _MyPageState extends State<MyPage> {
         Navigator.pushNamed(context, '/search');
         break;
       case 2:
-        Navigator.pushNamed(context, '/camera');
+        Navigator.pushNamed(context, '/camera').then((value) => {
+              setState(() {
+                _selectedIndex = value as int;
+              })
+            });
         break;
       case 3:
         Navigator.pushNamed(context, '/mypage');

@@ -1,4 +1,4 @@
-// ignore_for_file: unused_field, avoid_print
+// ignore_for_file: unused_field, avoid_print, use_build_context_synchronously
 
 import 'dart:async';
 import 'package:camera/camera.dart';
@@ -81,6 +81,7 @@ class _TraslatePageState extends State<TraslatePage> {
     }
 
     _recognitionIsBusy = false;
+    Navigator.of(context).pop();
   }
 
   Future<void> _recognizeText(InputImage inputImage) async {
@@ -123,7 +124,7 @@ class _TraslatePageState extends State<TraslatePage> {
             color: Colors.black,
           ),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(0);
           },
         ),
       ),
