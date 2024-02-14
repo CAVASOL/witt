@@ -145,7 +145,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               AuthButton(
                 onTap: signUserUp,
-                text: "Register",
+                text: "WITT 가입하기",
                 bgColor: const Color(0xFF292929),
                 textColor: Colors.white,
               ),
@@ -169,7 +169,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         horizontal: 8,
                       ),
                       child: Text(
-                        'Or continue with',
+                        '또는 아래 계정으로 계속하기',
                         style: TextStyle(
                           fontSize: 14,
                           color: Colors.grey.shade600,
