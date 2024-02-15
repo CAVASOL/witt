@@ -18,15 +18,15 @@
 
 | **Welcome** |  **Sign-in**  |  **Home** |
 | :---:|:---:|:---:|
-| <img align="center" alt="WITT Application welcome screen image" src="./pics/welcome.png" width="100%" /> | <img align="center" alt="WITT Application sign-in screen image" src="./pics/signin.png" width="100%" /> |<img align="center" alt="WITT Application home screen image" src="./pics/home.png" width="100%" /> |
+| <img align="center" alt="WITT Application welcome screen image" src="./pics/welcome.png" width="200px" /> | <img align="center" alt="WITT Application sign-in screen image" src="./pics/signin.png" width="200px" /> |<img align="center" alt="WITT Application home screen image" src="./pics/home.png" width="200px" /> |
 
-| **Livi Detection** | **Image Detection A** | **Image Detection B**  |
+| **Live Detection** | **Image Detection A** | **Image Detection B**  |
 | :---:|:---:|:---:|
-| <img align="center" alt="WITT Application object detection with camera screen image" src="./pics/camera1.png" width="100%" /> | <img align="center" alt="WITT Application object detection with gallery screen image" src="./pics/gallery.png" width="100%" /> |<img align="center" alt="WITT Application object detection results as label screen image" src="./pics/gallery_image.png" width="100%" /> |
+| <img align="center" alt="WITT Application object detection with camera screen image" src="./pics/camera1.png" width="200px" /> | <img align="center" alt="WITT Application object detection with gallery screen image" src="./pics/gallery.png" width="200px" /> |<img align="center" alt="WITT Application object detection results as label screen image" src="./pics/gallery_image.png" width="200px" /> |
 
 | **Translator/OCR/STT** | **GPT with Kor** | **GPT with Eng**  |
 | :---:|:---:|:---:|
-| <img align="center" alt="WITT Application translator, ocr, stt service screen image" src="./pics/ocr_stt_translate.png" width="100%" /> | <img align="center" alt="WITT Application gpt with Korean screen image" src="./pics/gpt_kor.png" width="100%" /> |<img align="center" alt="WITT Application gpt with English screen image" src="./pics/gpt_en.png" width="100%" /> |
+| <img align="center" alt="WITT Application translator, ocr, stt service screen image" src="./pics/ocr_stt_translate.png" width="200px" /> | <img align="center" alt="WITT Application gpt with Korean screen image" src="./pics/gpt_kor.png" width="200px" /> |<img align="center" alt="WITT Application gpt with English screen image" src="./pics/gpt_en.png" width="200px" /> |
 
 ## Development environment and technology stack
 
