@@ -14,7 +14,7 @@
 * 사용자 주도적 환경 탐색 및 학습 경험 제공
 * 다차원적 도구로서의 활용
 
-## Development environment and technology stack
+## Development environment
 
 * **IDE**: VS Code  
 * **Version Control**: Git & Github  
