@@ -14,6 +14,13 @@
 * 사용자 주도적 환경 탐색 및 학습 경험 제공
 * 다차원적 도구로서의 활용
 
+## Development environment and technology stack
+
+* **IDE**: VS Code  
+* **Version Control**: Git & Github  
+* **Models**: YOLO v5l, YOLO v8n  
+* **Technology Stack**: Flutter Framework, Dart, Flutter Packages, Firebase, HTTP  
+
 ## WITT Screen composition and functions
 
 | **Welcome** |  **Sign-in**  |  **Home** |
@@ -27,10 +34,3 @@
 | **Translator / OCR / STT** | **GPT with Korean** | **GPT with English**  |
 | :---:|:---:|:---:|
 | <img align="center" alt="WITT Application translator, ocr, stt service screen image" src="./pics/ocr_stt_translate.png" width="240px" /> | <img align="center" alt="WITT Application gpt with Korean screen image" src="./pics/gpt_kor.png" width="240px" /> |<img align="center" alt="WITT Application gpt with English screen image" src="./pics/gpt_en.png" width="240px" /> |
-
-## Development environment and technology stack
-
-* **IDE**: VS Code  
-* **Version Control**: Git & Github  
-* **Models**: YOLO v5l, YOLO v8n  
-* **Technology Stack**: Flutter Framework, Dart, Flutter Packages, Firebase, HTTP  
