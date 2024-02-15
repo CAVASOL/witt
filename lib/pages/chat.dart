@@ -38,7 +38,7 @@ class _ChatPageState extends State<ChatPage> {
               color: Colors.black,
             ),
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.of(context).pop(0);
             },
           ),
         ),
@@ -167,10 +167,18 @@ class _ChatPageState extends State<ChatPage> {
   void navigateTo(int index) {
     switch (index) {
       case 0:
-        Navigator.pushNamed(context, '/home');
+        Navigator.pushNamed(context, '/home').then((value) => {
+              setState(() {
+                _selectedIndex = value as int;
+              })
+            });
         break;
       case 1:
-        Navigator.pushNamed(context, '/search');
+        Navigator.pushNamed(context, '/search').then((value) => {
+              setState(() {
+                _selectedIndex = value as int;
+              })
+            });
         break;
       case 2:
         Navigator.pushNamed(context, '/camera').then((value) => {
@@ -180,7 +188,11 @@ class _ChatPageState extends State<ChatPage> {
             });
         break;
       case 3:
-        Navigator.pushNamed(context, '/mypage');
+        Navigator.pushNamed(context, '/mypage').then((value) => {
+              setState(() {
+                _selectedIndex = value as int;
+              })
+            });
         break;
     }
   }
