@@ -1,6 +1,6 @@
 # WITT
 
-`WITT`는 기발함을 의미하는 단어 **Wit**와 **What is that**의 합성어로, 딥러닝 기술을 활용하여 다양한 사용자들에게 편의를 제공하는 서비스를 구현하자는 취지를 담고 있습니다. WITT의 핵심 기능은 `안드로이드 모바일 카메라`를 통한 `실시간 객체 탐지 및 이미지 탐색`으로서, 사용자가 자율적으로 주변 환경과 객체를 탐색할 수 있도록 서비스를 지원합니다. 더불어, 탐색한 객체에 대한 정보를 제공받을 수 있도록 `GPT`,`번역(한국어, 영어, 중국어, 일본어)`, `OCR(Optical Character Recognition)` 및 `STT(Speech to Text)` 서비스를 지원합니다.  
+`WITT`는 기발함을 의미하는 단어 "**Wit**" 와 "**What is that**" 의 합성어로, 딥러닝 기술을 활용하여 다양한 사용자들에게 편의를 제공하는 서비스를 구현하자는 취지를 담고 있습니다. WITT의 핵심 기능은 `안드로이드 모바일 카메라`를 통한 `실시간 객체 탐지 및 이미지 탐색`으로서, 사용자가 자율적으로 주변 환경과 객체를 탐색할 수 있도록 서비스를 지원합니다. 더불어, 탐색한 객체에 대한 정보를 제공받을 수 있도록 `GPT`,`번역(한국어, 영어, 중국어, 일본어)`, `OCR(Optical Character Recognition)` 및 `STT(Speech to Text)` 서비스를 지원합니다.  
 
 ## Why you need WITT
 
@@ -21,7 +21,7 @@
 * **Models**: YOLO v5l, YOLO v8n  
 * **Technology Stack**: Flutter Framework, Dart, Flutter Packages, Firebase, HTTP  
 
-## WITT Screen composition and functions
+## WITT Screen Composition and Functions
 
 | **Welcome** |  **Sign-in**  |  **Home** |
 | :---:|:---:|:---:|
