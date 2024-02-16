@@ -8,7 +8,7 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF7DC7BF),
+      backgroundColor: const Color(0xFF45757B),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -17,7 +17,7 @@ class Welcome extends StatelessWidget {
             ),
             Center(
               child: Image.asset(
-                AssetsManager.wittLogo,
+                AssetsManager.wittLogoDark,
                 width: 200,
                 height: 200,
               ),
@@ -62,7 +62,7 @@ class Welcome extends StatelessWidget {
                 Text(
                   '손님으로',
                   style: TextStyle(
-                    color: Color(0xFF292929),
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
                   ),
@@ -73,7 +73,7 @@ class Welcome extends StatelessWidget {
                 Text(
                   '입장하기',
                   style: TextStyle(
-                    color: Color(0xFF292929),
+                    color: Colors.white,
                     fontSize: 14,
                   ),
                 ),

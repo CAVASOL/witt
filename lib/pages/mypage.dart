@@ -23,7 +23,7 @@ class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color(0xFF45757B),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -31,25 +31,14 @@ class _MyPageState extends State<MyPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(
-                height: 180,
+                height: 100,
               ),
               Center(
                 child: Image.asset(
-                  AssetsManager.bye,
-                  width: 200,
-                  height: 200,
+                  AssetsManager.yar,
+                  width: 320,
+                  height: 320,
                 ),
-              ),
-              const Text(
-                "감사합니다 \n곧 다시 만나요!",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w400,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(
-                height: 16,
               ),
               Center(
                 child: GestureDetector(

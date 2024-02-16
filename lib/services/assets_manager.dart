@@ -8,8 +8,10 @@ class AssetsManager {
   static String googleLogo = "$imagePath/google.png";
   static String instaLogo = "$imagePath/insta.png";
   static String pinterestLogo = "$imagePath/pinterest.png";
-  static String wittLogo = "$imagePath/sam18.png";
+  static String wittLogoLight = "$imagePath/sam18.png";
+  static String wittLogoDark = "$imagePath/sam29.png";
   static String twitterLogo = "$imagePath/twitter.png";
   static String segSam = "$imagePath/segsam.png";
   static String bye = "$imagePath/sam5.png";
+  static String yar = "$imagePath/yar.png";
 }
