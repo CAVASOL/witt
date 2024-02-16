@@ -26,92 +26,95 @@ class _ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              Navigator.of(context).pop(0);
-            },
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
           ),
+          onPressed: () {
+            Navigator.of(context).pop(0);
+          },
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8),
-          child: DashChat(
-            currentUser: _curUser,
-            messageOptions: const MessageOptions(
-              currentUserContainerColor: Color(0xFF7DC7BF),
-              currentUserTextColor: Color(0xFF292929),
-              textColor: Color(0xFF292929),
-              timeTextColor: Color(0xFF292929),
-              currentUserTimeTextColor: Color(0xFF292929),
-              containerColor: Colors.blueGrey,
-            ),
-            onSend: (ChatMessage m) {
-              getChatResponse(m);
-            },
-            messages: _messages,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: DashChat(
+          currentUser: _curUser,
+          messageOptions: const MessageOptions(
+            currentUserContainerColor: Color(0xFF7DC7BF),
+            currentUserTextColor: Color(0xFF292929),
+            textColor: Color(0xFF292929),
+            timeTextColor: Color(0xFF292929),
+            currentUserTimeTextColor: Color(0xFF292929),
+            containerColor: Colors.blueGrey,
           ),
+          onSend: (ChatMessage m) {
+            getChatResponse(m);
+          },
+          messages: _messages,
         ),
-        bottomNavigationBar: Container(
-          height: 80,
-          decoration: BoxDecoration(
-            color: const Color(0xFF45757B),
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 20,
-                color: Colors.black.withOpacity(.1),
-              )
-            ],
-          ),
-          child: SafeArea(
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
-              child: GNav(
-                rippleColor: Colors.grey[300]!,
-                hoverColor: Colors.grey[100]!,
-                gap: 8,
-                activeColor: Colors.black,
-                iconSize: 24,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                duration: const Duration(milliseconds: 400),
-                tabBackgroundColor: Colors.white,
-                color: Colors.black,
-                tabs: const [
-                  GButton(
-                    icon: Icons.home_rounded,
-                    text: 'Home',
-                  ),
-                  GButton(
-                    icon: Icons.question_answer_rounded,
-                    text: 'Chat',
-                  ),
-                  GButton(
-                    icon: Icons.camera_rounded,
-                    text: 'Camera',
-                  ),
-                  GButton(
-                    icon: Icons.person_outline_rounded,
-                    text: 'My Page',
-                  ),
-                ],
-                selectedIndex: _selectedIndex,
-                onTabChange: (index) {
-                  setState(() {
-                    _selectedIndex = index;
-                  });
-                  navigateTo(index);
-                },
+      ),
+      bottomNavigationBar: Container(
+        height: 80,
+        decoration: BoxDecoration(
+          color: const Color(0xFF45757B),
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 20,
+              color: Colors.black.withOpacity(.1),
+            )
+          ],
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 15.0,
+              vertical: 8,
+            ),
+            child: GNav(
+              rippleColor: Colors.grey[300]!,
+              hoverColor: Colors.grey[100]!,
+              gap: 8,
+              activeColor: Colors.black,
+              iconSize: 24,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 12,
               ),
+              duration: const Duration(
+                milliseconds: 400,
+              ),
+              tabBackgroundColor: Colors.white,
+              color: Colors.black,
+              tabs: const [
+                GButton(
+                  icon: Icons.home_rounded,
+                  text: 'Home',
+                ),
+                GButton(
+                  icon: Icons.question_answer_rounded,
+                  text: 'Chat',
+                ),
+                GButton(
+                  icon: Icons.camera_rounded,
+                  text: 'Camera',
+                ),
+                GButton(
+                  icon: Icons.person_outline_rounded,
+                  text: 'My Page',
+                ),
+              ],
+              selectedIndex: _selectedIndex,
+              onTabChange: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+                navigateTo(index);
+              },
             ),
           ),
         ),

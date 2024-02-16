@@ -28,152 +28,156 @@ class _ImageDetectPageState extends State<ImageDetect> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.clear_rounded,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              Navigator.of(context).pop(0);
-            },
-          ),
-        ),
+    return Scaffold(
+      appBar: AppBar(
         backgroundColor: Colors.white,
-        body: SingleChildScrollView(
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SafeArea(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Stack(
-                        children: [
-                          _image != null
-                              ? Container(
-                                  width: 320,
-                                  height: 360,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.rectangle,
-                                    color: Colors.grey.shade100,
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: MemoryImage(_image!),
-                                    ),
-                                  ),
-                                )
-                              : Container(
-                                  width: 320,
-                                  height: 360,
-                                  color: Colors.grey.shade200,
-                                ),
-                          for (var box in boundingBox)
-                            Positioned(
-                              left: box[0].toDouble() * imageWidth,
-                              top: box[1].toDouble() * imageHeight,
-                              child: Container(
-                                width: (box[2].toDouble() - box[0].toDouble()) *
-                                    imageWidth,
-                                height:
-                                    (box[3].toDouble() - box[1].toDouble()) *
-                                        imageHeight,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+            ),
+            child: SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Stack(
+                      children: [
+                        _image != null
+                            ? Container(
+                                width: 320,
+                                height: 360,
                                 decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.white,
-                                    width: 2,
+                                  shape: BoxShape.rectangle,
+                                  color: Colors.grey.shade100,
+                                  image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: MemoryImage(_image!),
                                   ),
+                                ),
+                              )
+                            : Container(
+                                width: 320,
+                                height: 360,
+                                color: Colors.grey.shade200,
+                              ),
+                        for (var box in boundingBox)
+                          Positioned(
+                            left: box[0].toDouble() * imageWidth,
+                            top: box[1].toDouble() * imageHeight,
+                            child: Container(
+                              width: (box[2].toDouble() - box[0].toDouble()) *
+                                  imageWidth,
+                              height: (box[3].toDouble() - box[1].toDouble()) *
+                                  imageHeight,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.white,
+                                  width: 2,
                                 ),
                               ),
-                            )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
+                            ),
+                          )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Column(
+                      children: [
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        InkWell(
+                          onTap: () => showImagePickerOption(context),
+                          child: const Button(
+                            text: "사진 가져오기",
+                            bgColor: Colors.white,
+                            textColor: Color(0xFF292929),
+                            borderColor: Colors.grey,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        InkWell(
+                          onTap: () => _uploadImage(),
+                          child: const Button(
+                            text: "보내기",
+                            bgColor: Color(0xFF292929),
+                            textColor: Colors.white,
+                            borderColor: Color(0xFF292929),
+                          ),
+                        ),
+                      ],
+                    ),
+                    if (classNames != null && classNames.isNotEmpty)
                       Column(
                         children: [
                           const SizedBox(
-                            height: 12,
+                            height: 20,
                           ),
-                          InkWell(
-                            onTap: () => showImagePickerOption(context),
-                            child: const Button(
-                              text: "사진 가져오기",
-                              bgColor: Colors.white,
-                              textColor: Color(0xFF292929),
-                              borderColor: Colors.grey,
+                          Container(
+                            width: 320,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.grey,
+                              ),
+                              borderRadius: BorderRadius.circular(
+                                8,
+                              ),
+                            ),
+                            padding: const EdgeInsets.all(10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "결과는?",
+                                  style: TextStyle(
+                                    color: Color(0xFF292929),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  classNames.join('\n'),
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           const SizedBox(
-                            height: 8,
-                          ),
-                          InkWell(
-                            onTap: () => _uploadImage(),
-                            child: const Button(
-                              text: "보내기",
-                              bgColor: Color(0xFF292929),
-                              textColor: Colors.white,
-                              borderColor: Color(0xFF292929),
-                            ),
-                          ),
+                            height: 80,
+                          )
                         ],
-                      ),
-                      if (classNames != null && classNames.isNotEmpty)
-                        Column(
-                          children: [
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Container(
-                              width: 320,
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              padding: const EdgeInsets.all(10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    "결과는?",
-                                    style: TextStyle(
-                                      color: Color(0xFF292929),
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Text(
-                                    classNames.join('\n'),
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 80,
-                            )
-                          ],
-                        )
-                      else
-                        Container(),
-                    ],
-                  ),
+                      )
+                    else
+                      Container(),
+                  ],
                 ),
               ),
             ),
@@ -189,7 +193,9 @@ class _ImageDetectPageState extends State<ImageDetect> {
       context: context,
       builder: (builder) {
         return Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(
+            20,
+          ),
           child: SizedBox(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height / 4.5,

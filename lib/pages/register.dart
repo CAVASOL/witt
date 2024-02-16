@@ -41,11 +41,11 @@ class _RegisterPageState extends State<RegisterPage> {
           password: passwordController.text,
         );
       } else {
-        showErr("패드워드를 다시 입력해 주세요.");
+        showErr("비밀번호를 다시 입력해 주세요.");
       }
-      Navigator.pop(context); // Close the dialog
+      Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
-      Navigator.pop(context); // Close the dialog
+      Navigator.pop(context);
       showErr(e.code);
     }
   }
@@ -138,10 +138,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 obscureText: true,
               ),
               const SizedBox(
-                height: 10,
-              ),
-              const SizedBox(
-                height: 25,
+                height: 36,
               ),
               AuthButton(
                 onTap: signUserUp,

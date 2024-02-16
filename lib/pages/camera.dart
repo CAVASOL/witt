@@ -46,58 +46,57 @@ class _PickImageState extends State<PickImage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              Navigator.of(context).pop(0);
-            },
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
           ),
-          bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(36),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                  icon: const Column(
-                    children: [
-                      Icon(Icons.center_focus_strong_rounded),
-                      Text("카메라"),
-                    ],
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      option = Options.frame;
-                    });
-                  },
+          onPressed: () {
+            Navigator.of(context).pop(0);
+          },
+        ),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(
+            36,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                icon: const Column(
+                  children: [
+                    Icon(Icons.center_focus_strong_rounded),
+                    Text("카메라"),
+                  ],
                 ),
-                IconButton(
-                  icon: const Column(
-                    children: [
-                      Icon(Icons.add_a_photo_rounded),
-                      Text("앨범"),
-                    ],
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      option = Options.imagev8seg;
-                    });
-                  },
+                onPressed: () {
+                  setState(() {
+                    option = Options.frame;
+                  });
+                },
+              ),
+              IconButton(
+                icon: const Column(
+                  children: [
+                    Icon(Icons.add_a_photo_rounded),
+                    Text("앨범"),
+                  ],
                 ),
-              ],
-            ),
+                onPressed: () {
+                  setState(() {
+                    option = Options.imagev8seg;
+                  });
+                },
+              ),
+            ],
           ),
         ),
-        body: task(option),
       ),
+      body: task(option),
     );
   }
 
@@ -116,7 +115,7 @@ class _PickImageState extends State<PickImage> {
         ),
         Center(
           child: Image.asset(
-            AssetsManager.bye,
+            AssetsManager.wittLogoLight,
             width: 200,
             height: 200,
           ),
@@ -305,15 +304,22 @@ class _YoloVideoState extends State<YoloVideo> {
         height: (result["box"][3] - result["box"][1]) * factorY,
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-            border: Border.all(color: Colors.yellow, width: 4.0),
+            borderRadius: const BorderRadius.all(
+              Radius.circular(
+                10,
+              ),
+            ),
+            border: Border.all(
+              color: Colors.yellow,
+              width: 4,
+            ),
           ),
           child: Text(
             "${result['tag']} ${(result['box'][4] * 100).toStringAsFixed(0)}%",
             style: TextStyle(
               background: Paint()..color = colorPick,
               color: Colors.white,
-              fontSize: 18.0,
+              fontSize: 16,
             ),
           ),
         ),
