@@ -36,7 +36,7 @@ Use as a multidimensional tool
 ## Artifact
 
 WITT 프로젝트 아티팩트 폴더는 본 리포지토리에 포함되어 있으며, 주요 디렉토리 구성은 다음과 같습니다.  
-아티팩트 디렉토리 구성과 관련한 자세한 정보는 [링크](https://github.com/CAVASOL/witt/tree/main/artifact)를 클릭해 주세요.  
+상세한 아티팩트 디렉토리 구성 및 실험 결과와 관련한 정보는 [링크](https://github.com/CAVASOL/witt/tree/main/artifact)를 클릭하여 확인해 주세요.
 
 ```
 artifact
