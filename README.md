@@ -26,13 +26,6 @@ Provides user-driven environmental exploration and learning experience
 * 다차원적 도구로서의 활용  
 Use as a multidimensional tool  
 
-## Development environment
-
-* **IDE**: VS Code  
-* **Version Control**: Git & Github  
-* **Models**: YOLO v5l, YOLO v8n  
-* **Technology Stack**: Flutter Framework, Dart, Flutter Packages, Firebase, HTTP  
-
 ## Artifact
 
 WITT 프로젝트 아티팩트 폴더는 본 리포지토리에 포함되어 있으며, 주요 디렉토리 구성은 다음과 같습니다.  
@@ -48,16 +41,31 @@ artifact
     └── README.md
 ```
 
+## Development environment
+
+* **IDE**: VS Code  
+* **Version Control**: Git & Github  
+* **Models**: YOLO v5l, YOLO v8n  
+* **Technology Stack**: Flutter Framework, Dart, Flutter Packages, Firebase, HTTP  
+
 ## WITT Screen Composition and Functions
 
 | **Welcome** |  **Sign-in**  |  **Home** |
 | :---:|:---:|:---:|
-| <img align="center" alt="WITT Application welcome screen image" src="./pics/welcome.png" width="240px" /> | <img align="center" alt="WITT Application sign-in screen image" src="./pics/signin.png" width="240px" /> |<img align="center" alt="WITT Application home screen image" src="./pics/home.png" width="240px" /> |
+| <img align="center" alt="WITT application welcome screen image" src="./pics/welcome.png" width="240px" /> | <img align="center" alt="WITT application sign-in screen image" src="./pics/signin.png" width="240px" /> | <img align="center" alt="WITT application home screen image" src="./pics/home.png" width="240px" /> |
 
-| **Live Detection** (YOLO v8n) | **Image Detection A** (YOLO v8n) | **Image Detection B** (YOLO v5l)  |
+| **Home** | **Explore** | **Image Detection** (YOLO v5l)  |
 | :---:|:---:|:---:|
-| <img align="center" alt="WITT Application object detection with camera screen image" src="./pics/camera1.png" width="240px" /> | <img align="center" alt="WITT Application object detection with gallery screen image" src="./pics/gallery.png" width="240px" /> |<img align="center" alt="WITT Application object detection results as label screen image" src="./pics/gallery_image.png" width="240px" /> |
+| <img align="center" alt="WITT application home screen image" src="./pics/home.png" width="240px" /> | <img align="center" alt="WITT application explore screen image" src="./pics/explore.png" width="240px" /> | <img align="center" alt="WITT application object detection results as label screen image" src="./pics/gallery_image.png" width="240px" /> |
 
-| **Translator / OCR / STT** | **GPT with Korean** | **GPT with English**  |
+| **Camera** | **Live Detection** (YOLO v8n) | **Image Detection** (YOLO v8n) |
 | :---:|:---:|:---:|
-| <img align="center" alt="WITT Application translator, ocr, stt service screen image" src="./pics/ocr_stt_translate.png" width="240px" /> | <img align="center" alt="WITT Application gpt with Korean screen image" src="./pics/gpt_kor.png" width="240px" /> |<img align="center" alt="WITT Application gpt with English screen image" src="./pics/gpt_en.png" width="240px" /> |
+| <img align="center" alt="WITT application camera screen image" src="./pics/camera.png" width="240px" /> | <img align="center" alt="WITT application camera live detetion screen image" src="./pics/live.png" width="240px" /> | <img align="center" alt="WITT application image object detection screen image" src="./pics/gallery.png" width="240px" /> |
+
+| **Chat GPT** | **GPT with Korean** | **GPT with English**  |
+| :---:|:---:|:---:|
+| <img align="center" alt="WITT application chat gpt screen image" src="./pics/gpt.png" width="240px" /> | <img align="center" alt="WITT application gpt with Korean screen image" src="./pics/gpt_kor.png" width="240px" /> |<img align="center" alt="WITT application gpt with English screen image" src="./pics/gpt_en.png" width="240px" /> |
+
+| **Translator** | **캡쳐하기** (OCR) | **캡쳐한 후 번역** (OCR) |
+| :---:|:---:|:---:|
+| <img align="center" alt="WITT application translator screen image" src="./pics/ocr_stt_translate.png.png" width="240px" /> | <img align="center" alt="WITT application optical character recognition image capture screen image" src="./pics/ocr.png" width="240px" /> | <img align="center" alt="WITT application optical character recognition results screen image" src="./pics/ocr_res.png" width="240px" /> |
