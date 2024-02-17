@@ -81,7 +81,6 @@ class _TraslatePageState extends State<TraslatePage> {
     }
 
     _recognitionIsBusy = false;
-    Navigator.of(context).pop();
   }
 
   Future<void> _recognizeText(InputImage inputImage) async {
@@ -117,7 +116,7 @@ class _TraslatePageState extends State<TraslatePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         leading: IconButton(
           icon: const Icon(
             Icons.clear_rounded,
