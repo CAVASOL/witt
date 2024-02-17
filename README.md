@@ -68,4 +68,4 @@ artifact
 
 | **Translator** | **캡쳐하기** (OCR) | **캡쳐한 후 번역** (OCR) |
 | :---:|:---:|:---:|
-| <img align="center" alt="WITT application translator screen image" src="./pics/ocr_stt_translate.png.png" width="240px" /> | <img align="center" alt="WITT application optical character recognition image capture screen image" src="./pics/ocr.png" width="240px" /> | <img align="center" alt="WITT application optical character recognition results screen image" src="./pics/ocr_res.png" width="240px" /> |
+| <img align="center" alt="WITT application translator screen image" src="./pics/ocr_stt_translate.png" width="240px" /> | <img align="center" alt="WITT application optical character recognition image capture screen image" src="./pics/ocr.png" width="240px" /> | <img align="center" alt="WITT application optical character recognition results screen image" src="./pics/ocr_res.png" width="240px" /> |
