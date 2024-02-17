@@ -33,6 +33,21 @@ Use as a multidimensional tool
 * **Models**: YOLO v5l, YOLO v8n  
 * **Technology Stack**: Flutter Framework, Dart, Flutter Packages, Firebase, HTTP  
 
+## Artifact
+
+WITT 프로젝트 아티팩트 폴더는 본 리포지토리에 포함되어 있으며, 주요 디렉토리 구성은 다음과 같습니다.  
+아티팩트 디렉토리 구성과 관련한 자세한 정보는 [링크](https://github.com/CAVASOL/witt/tree/main/artifact)를 클릭해 주세요.  
+
+```
+artifact
+    ├── Yolov5l
+    ├── Yolov8n
+    ├── animals_Y5l.ipynb
+    ├── animals_Y8n.ipynb
+    ├── Augmentation.ipynb
+    └── README.md
+```
+
 ## WITT Screen Composition and Functions
 
 | **Welcome** |  **Sign-in**  |  **Home** |
