@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:login_auth/components/info_card.dart';
 import 'package:login_auth/components/sample.dart';
-import 'package:login_auth/components/theme_button.dart';
 import 'package:login_auth/services/assets_manager.dart';
 import 'package:login_auth/widgets/widgets.dart';
 
@@ -34,17 +33,7 @@ class HomeState extends State<Home> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 40,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    right: 20,
-                    bottom: 40,
-                  ),
-                  child: ThemeButton(
-                    color: Colors.red,
-                    onTap: () {},
-                  ),
+                  height: 80,
                 ),
                 const SafeArea(
                   child: Center(
