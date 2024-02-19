@@ -308,7 +308,7 @@ class _ImageDetectPageState extends State<ImageDetect> {
   Future<void> _uploadImage() async {
     if (selectedImage == null) return;
 
-    String uploadUrl = "http://172.29.113.65:8000/image";
+    String uploadUrl = "http://172.30.1.90:8000/image";
     Dio dio = Dio();
 
     try {
