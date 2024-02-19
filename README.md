@@ -48,6 +48,10 @@ artifact
 * **Models**: YOLO v5l, YOLO v8n  
 * **Technology Stack**: Flutter Framework, Dart, Flutter Packages, Firebase, HTTP  
 
+## Demo
+
+<img align="center" alt="WITT application screen composition and functions gif" src="./pics/demo.gif" width="240px">
+
 ## WITT Screen Composition and Functions
 
 | **Welcome** |  **Sign-in**  |  **Home** |
